@@ -1,0 +1,349 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1f2029;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  padding: 0 8px;
+  width: 120px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: #1f2029;
+  z-index: 3;
+}
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  gap: 15px;
+}
+.nav-logo img {
+  width: 30px;
+}
+.nav-menu {
+  padding-top: 30px;
+}
+.nav-menu li {
+  padding: 8px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 30px 0;
+}
+.nav-menu li:hover {
+  background-color: #f05755;
+}
+
+.wrapper {
+  background-color: #17181e;
+  padding-top: 25px;
+  padding-left: 140px;
+  border-radius: 10px;
+  min-height: 100vh;
+  position: relative;
+}
+.wrapper .content {
+  width: calc(100vw - 600px);
+}
+.wrapper .box {
+  width: calc(100% - 500px);
+}
+.wrapper .header {
+  display: flex;
+}
+.wrapper .header p {
+  color: #6B728E;
+  font-weight: 500;
+}
+.wrapper .header-search {
+  background-color: #1f2029;
+  height: 50px;
+  width: 350px;
+  display: flex;
+  padding: 0 15px;
+  border-radius: 8px;
+}
+.wrapper .header-search img {
+  width: 25px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.wrapper .header-search input {
+  width: 100%;
+  align-items: center;
+  background-color: transparent;
+  outline: none;
+  padding: 10px 8px;
+  outline: none;
+  border: 0;
+  color: white;
+  font-size: 150%;
+}
+.wrapper .catergory {
+  margin: 50px 0;
+  display: flex;
+  gap: 30px;
+}
+.wrapper .catergory-item {
+  display: flex;
+  gap: 15px;
+  width: 150px;
+  height: 50px;
+  background-color: #1f2029;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.wrapper .catergory-item img {
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.wrapper .product {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+.wrapper .product-item {
+  background-color: #1f2029;
+  padding: 10px 15px 15px 15px;
+}
+.wrapper .product-item img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 12px;
+}
+.wrapper .product-item-name {
+  margin-top: 15px;
+  font-size: 180%;
+}
+.wrapper .product-item-price {
+  margin-top: 15px;
+  position: relative;
+}
+.wrapper .product-item-price h3 {
+  margin-top: 5px;
+  font-size: 150%;
+}
+.wrapper .product-item-price button {
+  background-color: #f05755;
+  padding: 10px;
+  position: absolute;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 15px 0px 12px;
+  cursor: pointer;
+}
+.wrapper .product-item-price button img {
+  width: 25px;
+  height: 25px;
+}
+.wrapper .red {
+  color: #EB6440;
+}
+.wrapper .order {
+  position: fixed;
+  right: 15px;
+  top: 25px;
+  width: 400px;
+  height: 100vh;
+}
+.wrapper .order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .order-header-text h2 {
+  font-size: 180%;
+}
+.wrapper .order-header-text select {
+  width: 70px;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: white;
+  cursor: pointer;
+}
+.wrapper .order-header-text select option {
+  background-color: #1f2029;
+  padding: 10px 6px;
+  cursor: pointer;
+  height: 90px;
+  border: 0;
+  outline: none;
+}
+.wrapper .order-product {
+  margin-top: 50px;
+}
+.wrapper .order-product-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: #1f2029;
+  border-radius: 15px;
+}
+.wrapper .order-product input {
+  background-color: transparent;
+  width: 15px;
+  outline: none;
+  border: none;
+  color: white;
+  height: 15px;
+  font-size: 125%;
+}
+.wrapper .order-product .product-img {
+  height: 80px;
+  width: 80px;
+  background-color: red;
+}
+.wrapper .order-product .product-infor {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.wrapper .order-product .product-infor-count {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.wrapper .order-product .product-infor-count .product-infor-count-btn {
+  background-color: #17181e;
+  padding: 8px;
+  border-radius: 8px;
+}
+.wrapper .order-product .product-infor-count img {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.wrapper .order-total {
+  position: absolute;
+  right: 25px;
+  bottom: 50px;
+  width: 400px;
+}
+.wrapper .order-total-item {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 25px;
+  padding-bottom: 30px;
+}
+.wrapper .order-total-item:nth-child(2) {
+  border-bottom: 1px solid #6B728E;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.wrapper .order-total button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f05755;
+  color: white;
+  font-size: 125%;
+  border-radius: 12px;
+  outline: none;
+  border: 0;
+}
+
+.wrapper.location {
+  height: 100vh;
+  padding-left: 250px;
+}
+.wrapper.location .box {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 50px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.wrapper.location .box-item {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  background-color: #1f2029;
+  border-radius: 18px;
+  padding: 15px;
+}
+.wrapper.location .box-item p {
+  position: absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 150%;
+}
+.wrapper.location .box-item img {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper.bill .box-header {
+  margin-top: 60px;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+}
+.wrapper.bill .box-header h1 {
+  display: block;
+  padding: 0 15px;
+  border-bottom: 2px solid #EB6440;
+}
+.wrapper.bill .box-content {
+  margin-top: 100px;
+}
+.wrapper.bill .box-content table {
+  margin: 0 auto;
+}
+.wrapper.bill .box-content table tr {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #6B728E;
+}
+.wrapper.bill .box-content table th, .wrapper.bill .box-content table td {
+  padding: 10px 12px;
+  min-width: 150px;
+  text-align: center;
+}
+.wrapper.bill .box-content table th button, .wrapper.bill .box-content table td button {
+  padding: 8px 30px;
+  display: flex;
+  margin: 0 auto;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #f05755;
+  color: white;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */
