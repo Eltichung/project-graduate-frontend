@@ -136,7 +136,7 @@ export default {
     ...mapActions({
       getType: 'home/getType',
       getProduct: 'home/getProduct',
-      createProduct: 'home/createProduct',
+      createBill: 'home/createBill',
       searchProduct: 'home/searchProduct',
       filterProductByType: 'home/filterProductByType',
     }),
@@ -205,7 +205,7 @@ export default {
         method: 1,
         arr_product: arrProduct,
       }
-      this.createProduct(data).then((data) => {
+      this.createBill(data).then((data) => {
         this.$refs.btnAdd.forEach((item) => {
           item.classList.remove('disabled')
           item.disabled = false

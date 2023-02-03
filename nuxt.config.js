@@ -21,7 +21,11 @@ export default {
   css: ['~/assets/css/style.scss','~/assets/css/flexboxgrid.min.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/axios.js','~/plugins/toast.js'],
+  plugins: [
+    '~/plugins/axios.js',
+    '~/plugins/toast.js',
+    '~/plugins/modal.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,6 +34,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

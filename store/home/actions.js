@@ -24,7 +24,7 @@ export default {
         })
     })
   },
-  createProduct({ commit },data) {
+  createBill({ commit },data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .post(api.API_CREATE_BILL,data)
@@ -59,5 +59,41 @@ export default {
           reject(error)
         })
     })
-  }
+  },
+  getBill({ commit },status) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get(`${api.API_GET_BILL}/status=${status}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  getDetailBill({ commit }, idBill) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get(`${api.API_GET_DETAIL_BILL}/id_bill=${idBill}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  getBillByStatus({ commit }, status) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get(`${api.API_GET_BILL_BY_STATUS}/status=${status}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
 }

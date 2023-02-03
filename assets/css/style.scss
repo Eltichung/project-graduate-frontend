@@ -413,3 +413,22 @@ button
         }
     }
 }
+.modal
+{
+    color: #000;
+}
+.box-content.modal {
+    margin-top: 20px !important;
+}
+.vm--overlay {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+.vm--modal
+{
+    height: auto !important;
+    top: 50px!important;
+}
+#total
+{
+  text-align: right;
+}
