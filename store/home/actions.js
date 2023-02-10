@@ -12,6 +12,19 @@ export default {
         })
     })
   },
+  deleteType({ commit },slug) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .delete(`${api.API_DELETE_TYPE}/${slug}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+// product
   getProduct({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
@@ -24,10 +37,10 @@ export default {
         })
     })
   },
-  createBill({ commit },data) {
+  getAllProduct({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(api.API_CREATE_BILL,data)
+        .get(api.API_GET_ALL_PRODUCT)
         .then((response) => {
           resolve(response)
         })
@@ -52,6 +65,55 @@ export default {
     return new Promise((resolve, reject) => {
       this.$axios
         .get(`${api.API_FILTER_PRODUCT_BY_TYPE}/${data}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  deleteProduct({ commit },slug) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .delete(`${api.API_DELETE_PRODUCT}/${slug}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  updateProduct({ commit },data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(`${api.API_UPDATE_PRODUCT}`,data)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  addProduct({ commit },data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(`${api.API_ADD_PRODUCT}`,data)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+// bill
+  createBill({ commit },data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(api.API_CREATE_BILL,data)
         .then((response) => {
           resolve(response)
         })

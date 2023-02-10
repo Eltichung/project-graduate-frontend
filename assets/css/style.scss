@@ -413,6 +413,58 @@ button
         }
     }
 }
+.btn-edit
+{
+    display: flex;
+    gap: 5px;
+}
+.btn-add {
+    background-color: #3DD1E7;
+    border: 0 solid #E5E7EB;
+    box-sizing: border-box;
+    color: #000000;
+    display: flex;
+    font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1.75rem;
+    padding: .75rem 1.65rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 100%;
+    max-width: 150px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-left: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .btn-add:focus {
+    outline: 0;
+  }
+  
+  .btn-add:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #000000;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+  }
+  
+  .btn-add:hover:after {
+    bottom: 2px;
+    left: 2px;
+  }
+  
 .modal
 {
     color: #000;
@@ -431,4 +483,70 @@ button
 #total
 {
   text-align: right;
+}
+.btn-update
+{
+    background-color: #36A9AE !important;
+}
+.form
+{
+    background: #ffff;
+    padding:15px 15px;
+    border-radius: 8px;
+    h1
+    {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    form
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .form-group
+    {
+        display: flex;
+        align-items: center;
+        >span
+        {
+            display: flex;
+            align-items: center;
+        }
+        label
+        {
+            display: block;
+            min-width:150px;
+            font-size: 125%;
+        }
+        input,select
+        {
+            width: 250px;
+            padding: 2px 0;
+            padding-left: 10px;
+            font-size: 125%;
+        }
+        .input-file
+        {
+            display: flex;
+        }
+    }
+    .file
+    {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 50px;
+        img
+        {
+            width: 150px;
+            height: 150px;
+            object-fit: content;
+        }
+    }
+}
+.err
+{
+    color: red;
+    margin-left: 10px;
 }

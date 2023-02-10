@@ -25,6 +25,7 @@ export default {
     '~/plugins/axios.js',
     '~/plugins/toast.js',
     '~/plugins/modal.js',
+    '~/plugins/vee-validate.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

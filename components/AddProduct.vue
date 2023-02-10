@@ -1,0 +1,183 @@
+<!-- eslint-disable vue/no-mutating-props -->
+<template>
+  <modal name="form-product" :adaptive="true">
+    <div class="modal">
+      <div class="box-content modal">
+        <div class="form">
+          <h1>Product</h1>
+          <ValidationObserver v-slot="{ handleSubmit }">
+            <form action="" @submit.prevent="handleSubmit()">
+              <div class="form-group">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="input"
+                  rules="required"
+                >
+                  <label for="">Name</label>
+                  <input v-model="productSelected.name" type="text" />
+                  <p class="err">{{ errors[0] }}</p>
+                </ValidationProvider>
+              </div>
+              <div class="form-group">
+                <label for="">Type</label>
+                <select id="select" v-model="selected">
+                  <option
+                    v-for="item in type"
+                    :key="item.id"
+                    :value="item.id"
+                    >{{ item.name }}</option
+                  >
+                </select>
+              </div>
+              <div class="form-group">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="input"
+                  rules="required"
+                >
+                  <label for="">Description</label>
+                  <input v-model="productSelected.description" type="text" />
+                  <p class="err">{{ errors[0] }}</p>
+                </ValidationProvider>
+              </div>
+              <div class="form-group">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="input"
+                  rules="required"
+                >
+                  <label for="">Price</label>
+                  <input v-model="productSelected.price" type="number" />
+                  <p class="err">{{ errors[0] }}</p>
+                </ValidationProvider>
+              </div>
+              <div class="form-group file">
+                <img :src="preview" class="img-fluid" />
+                <div class="input-file">
+                  <label>Image</label>
+                  <input
+                    id="my-file"
+                    ref="file"
+                    type="file"
+                    accept="image/*"
+                    class="form-control-file"
+                    @change="previewImage"
+                  />
+                </div>
+              </div>
+            </form>
+          </ValidationObserver>
+        </div>
+      </div>
+      <div class="btn">
+        <button id="btn-close" @click="close">Close</button>
+        <button id="btn-submit" @click="handleSubmit()">Submit</button>
+      </div>
+    </div>
+  </modal>
+</template>
+<script>
+import { mapActions } from 'vuex'
+export default {
+  props: ['productSelected'],
+  data() {
+    return {
+      type: [],
+      dataProduct: {},
+      selected: '',
+      preview: '',
+      image: '',
+    }
+  },
+  created() {
+    this.getDataType()
+    this.selected = this.productSelected?.type?.id
+  },
+  methods: {
+    ...mapActions('home', ['getType', 'updateProduct', 'addProduct']),
+    close() {
+      this.$modal.hide('form-product')
+    },
+    getDataType() {
+      this.getType().then((data) => (this.type = data.data.data))
+    },
+    handleSubmit() {
+      // eslint-disable-next-line vue/no-mutating-props
+      this.productSelected.type = this.selected
+      const formData = new FormData()
+      if (this.$refs.file.files[0] != null)
+      {
+        formData.append('imgUrl', this.$refs.file.files[0] || null)
+      }
+      formData.append('name', this.productSelected.name)
+      formData.append('type', this.selected)
+      formData.append('description', this.productSelected.description)
+      formData.append('price', this.productSelected.price)
+      if(this.productSelected.slug !== '')
+      {
+        formData.append('slug', this.productSelected.slug)
+        console.log(formData)
+        this.updateProduct(formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then((data) => console.log(data))
+      }
+      else 
+      {
+        this.addProduct(formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }).then((data) => console.log(data))
+      }
+    },
+    previewImage(event) {
+      const input = event.target
+      if (input.files) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          this.preview = e.target.result
+        }
+        this.image = input.files[0]
+        reader.readAsDataURL(input.files[0])
+      }
+    },
+  },
+}
+</script>
+<style scoped>
+#btn-close {
+  padding: 12px 30px;
+  display: flex;
+  /* margin: 0 auto; */
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #f05755;
+  color: white;
+  cursor: pointer;
+}
+#btn-submit {
+  padding: 12px 30px;
+  display: flex;
+  /* margin: 0 auto; */
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  color: white;
+  cursor: pointer;
+}
+.btn {
+  padding-top: 50px;
+  padding-bottom: 30px;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+</style>
