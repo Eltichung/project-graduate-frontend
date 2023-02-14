@@ -1,6 +1,8 @@
 const api = {
   API_GET_TYPE: 'getType',
   API_DELETE_TYPE: 'deleteType',
+  API_ADD_TYPE: 'createType',
+  API_UPDATE_TYPE: 'deleteType',
   API_GET_PRODUCT: 'getProduct',
   API_GET_ALL_PRODUCT: 'getAllProduct',
   API_SEARCH_PRODUCT: 'product',
@@ -12,5 +14,7 @@ const api = {
   API_GET_BILL: 'filterStatusBill',
   API_GET_DETAIL_BILL: 'detailBill',
   API_GET_BILL_BY_STATUS: 'filterStatusBill',
+  API_STAT_TODAY: 'statToday',
+  API_STAT_BY_DATE: 'statByDate',
 }
 export default api

@@ -24,6 +24,30 @@ export default {
         })
     })
   },
+  addType({ commit },data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .delete(`${api.API_ADD_TYPE}`, data)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  updateType({ commit },data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(`${api.API_UPDATE_TYPE}`,data)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
 // product
   getProduct({ commit }) {
     return new Promise((resolve, reject) => {

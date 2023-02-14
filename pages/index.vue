@@ -12,9 +12,18 @@
     </div>
     <div class="catergory content">
       <div
+        id="hot-deal"
+        class="catergory-item middle-xs center-xs"
+        :class="{ active_type: currentType == -1 }"
+        @click="getDataProduct()"
+      >
+        <img src="/img/hot-deal.png" alt="" />
+      </div>
+      <div
         v-for="item in type"
         :key="item.id"
         class="catergory-item middle-xs center-xs"
+        :class="{ active_type: currentType == item.id }"
         @click="filterProduct(item.id)"
       >
         <img src="/img/loupe.png" alt="" />
@@ -89,8 +98,8 @@
           <p>${{ discount }}</p>
         </div>
         <div class="order-total-item">
-          <p class="gray">Sub Total</p>
-          <p>${{ subTotal }}</p>
+          <p class="gray">Total</p>
+          <p>${{ setTotal }}</p>
         </div>
         <button @click="orderBill">
           <img src="" alt="" />
@@ -117,6 +126,13 @@ export default {
       subTotal: 0,
       discount: 0,
       location: 1,
+      currentType: -1,
+    }
+  },
+  computed:{
+    setTotal() {
+      // eslint-disable-next-line no-return-assign, vue/no-side-effects-in-computed-properties
+      return this.total = (this.subTotal * (100 - this.discount)) / 100
     }
   },
   watch: {
@@ -144,12 +160,16 @@ export default {
       this.getType().then((data) => (this.type = data.data.data))
     },
     getDataProduct() {
-      this.getProduct().then((data) => (this.products = data.data.data))
+      this.getProduct().then((data) => {
+        this.products = data.data.data
+        this.currentType = -1
+      })
     },
     filterProduct(id) {
-      this.filterProductByType(id).then(
-        (data) => (this.products = data.data.data)
-      )
+      this.filterProductByType(id).then((data) => {
+        this.products = data.data.data
+        this.currentType = id
+      })
     },
     addProduct(item, index) {
       const indexItem = this.productsOrders.findIndex(
@@ -181,9 +201,6 @@ export default {
         (total, item) => (total += item.count * item.price),
         0
       )
-    },
-    setTotal() {
-      this.total = (this.subTotal * (100 - this.discount)) / 100
     },
     orderBill() {
       // eslint-disable-next-line prefer-const
@@ -220,8 +237,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .disabled {
   background-color: gray !important;
+}
+.active_type {
+  border: 2px solid #2192ff;
 }
 </style>

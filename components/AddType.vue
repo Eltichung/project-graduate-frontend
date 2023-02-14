@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-    <modal name="form-product" :adaptive="true">
+    <modal name="form-type" :adaptive="true">
       <div class="modal">
         <div class="box-content modal">
           <div class="form">
@@ -51,39 +51,27 @@
       return {
         type: [],
         dataProduct: {},
-        selected: '',
         preview: '',
         image: '',
       }
     },
     created() {
-      this.getDataType()
-      this.selected = this.productSelected?.type?.id
     },
     methods: {
-      ...mapActions('home', ['getType', 'updateProduct', 'addProduct']),
+      ...mapActions('home', ['getType', 'updateType', 'addType']),
       close() {
-        this.$modal.hide('form-product')
-      },
-      getDataType() {
-        this.getType().then((data) => (this.type = data.data.data))
+        this.$modal.hide('form-type')
       },
       handleSubmit() {
         // eslint-disable-next-line vue/no-mutating-props
-        this.productSelected.type = this.selected
         const formData = new FormData()
         if (this.$refs.file.files[0] != null)
         {
           formData.append('imgUrl', this.$refs.file.files[0] || null)
         }
         formData.append('name', this.productSelected.name)
-        formData.append('type', this.selected)
-        formData.append('description', this.productSelected.description)
-        formData.append('price', this.productSelected.price)
         if(this.productSelected.slug !== '')
         {
-          formData.append('slug', this.productSelected.slug)
-          console.log(formData)
           this.updateProduct(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
