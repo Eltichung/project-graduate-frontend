@@ -6,7 +6,7 @@
         <div class="form">
           <h1>Product</h1>
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form action="" @submit.prevent="handleSubmit()">
+            <form action="" @submit.prevent="handleSubmit(submit)">
               <div class="form-group">
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -65,13 +65,13 @@
                   />
                 </div>
               </div>
+              <div class="btn">
+                <button id="btn-close" @click="close">Close</button>
+                <button id="btn-submit">Submit</button>
+              </div>
             </form>
           </ValidationObserver>
         </div>
-      </div>
-      <div class="btn">
-        <button id="btn-close" @click="close">Close</button>
-        <button id="btn-submit" @click="handleSubmit()">Submit</button>
       </div>
     </div>
   </modal>
@@ -101,30 +101,26 @@ export default {
     getDataType() {
       this.getType().then((data) => (this.type = data.data.data))
     },
-    handleSubmit() {
+    submit() {
       // eslint-disable-next-line vue/no-mutating-props
       this.productSelected.type = this.selected
       const formData = new FormData()
-      if (this.$refs.file.files[0] != null)
-      {
+      if (this.$refs.file.files[0] != null) {
         formData.append('imgUrl', this.$refs.file.files[0] || null)
       }
       formData.append('name', this.productSelected.name)
       formData.append('type', this.selected)
       formData.append('description', this.productSelected.description)
       formData.append('price', this.productSelected.price)
-      if(this.productSelected.slug !== '')
-      {
+      if (this.productSelected.slug !== '') {
         formData.append('slug', this.productSelected.slug)
         console.log(formData)
         this.updateProduct(formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }).then((data) => console.log(data))
-      }
-      else 
-      {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }).then((data) => console.log(data))
+      } else {
         this.addProduct(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',

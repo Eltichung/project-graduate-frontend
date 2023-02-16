@@ -1,3 +1,4 @@
+<!-- eslint-disable prefer-const -->
 <template>
   <div class="wrapper">
     <div class="header box between-xs middle-xs">
@@ -76,7 +77,7 @@
                 <img src="/img/plus.png" alt="" />
               </div>
               <div class="product-infor-count-input">
-                <input ref="count" type="text" :value="item.count" />
+                <p>{{ item.quantity }}</p>
               </div>
               <div
                 class="product-infor-count-btn"
@@ -91,7 +92,7 @@
       <div class="order-total">
         <div class="order-total-item">
           <p class="gray">Sub Total</p>
-          <p>${{ subTotal }}</p>
+          <p>${{ setSubTotal }}</p>
         </div>
         <div class="order-total-item">
           <p class="gray">Discount</p>
@@ -107,16 +108,19 @@
         </button>
       </div>
     </div>
+    <InforCustomer :dataBill="dataBill" @clearCart="clearCart"/>
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'IndexPage',
+  middleware: 'check-auth',
   data() {
     return {
+      isShow: false,
       type: [],
       products: [],
       productsOrders: [],
@@ -125,15 +129,27 @@ export default {
       total: 0,
       subTotal: 0,
       discount: 0,
-      location: 1,
       currentType: -1,
+      location: 0,
+      inforCustommer: { name: '', phone: '', address: '' },
+      dataBill: {},
     }
   },
-  computed:{
+  computed: {
+    ...mapState('home', ['isAdmin']),
     setTotal() {
       // eslint-disable-next-line no-return-assign, vue/no-side-effects-in-computed-properties
-      return this.total = (this.subTotal * (100 - this.discount)) / 100
-    }
+      this.total = (this.setSubTotal * (100 - this.discount)) / 100
+      return this.total
+    },
+    setSubTotal() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.subTotal = this.productsOrders.reduce(
+        (total, item) => (total += item.quantity * item.price),
+        0
+      )
+      return this.subTotal
+    },
   },
   watch: {
     nameProduct(newValue) {
@@ -172,66 +188,63 @@ export default {
       })
     },
     addProduct(item, index) {
-      const indexItem = this.productsOrders.findIndex(
-        (element) => element.count === item.count
-      )
-      if (!indexItem) {
-        this.productsOrders[indexItem].count++
-      } else {
-        item.count = 1
+      // eslint-disable-next-line no-unused-vars
+      const issetProduct = this.productsOrders.find((product) => {
+        // eslint-disable-next-line eqeqeq
+        return item.id == product.id
+      })
+      if (issetProduct) item.quantity++
+      else {
+        item.quantity = 1
         this.productsOrders.push(item)
-        this.$refs.btnAdd[index].classList.add('disabled')
-        this.$refs.btnAdd[index].disabled = true
       }
-      this.setSubTotal()
     },
     increase(item, index) {
-      item.count++
-      this.$refs.count[index].value = item.count
-      this.setSubTotal()
+      this.productsOrders[index].quantity++
     },
     decrease(item, index) {
-      if (item.count === 1) this.productsOrders.splice(index, 1)
-      item.count--
-      this.$refs.count[index].value = item.count
-      this.setSubTotal()
+      if (item.quantity === 1) this.productsOrders.splice(index, 1)
+      else item.quantity--
     },
-    setSubTotal() {
-      this.subTotal = this.productsOrders.reduce(
-        (total, item) => (total += item.count * item.price),
-        0
-      )
+    dataCustommer(data) {
+      this.inforCustommer = data
+    },
+    clearCart() {
+      this.productsOrders = []
+      this.total = 0
+      this.subTotal = 0
+      this.discount = 0
     },
     orderBill() {
       // eslint-disable-next-line prefer-const
       let arrProduct = []
       this.productsOrders.forEach((item) => {
-        // eslint-disable-next-line prefer-const
-        let temp = {
+        const temp = {
           id_product: item.id,
           name: item.name,
-          quantity: item.count,
+          quantity: item.quantity,
           price: item.price,
         }
         arrProduct.push(temp)
       })
-      const data = {
+      // eslint-disable-next-line prefer-const
+      let bill = {
         total: this.total,
         status: 1,
         location: this.location,
-        method: 1,
         arr_product: arrProduct,
       }
-      this.createBill(data).then((data) => {
-        this.$refs.btnAdd.forEach((item) => {
-          item.classList.remove('disabled')
-          item.disabled = false
+      // eslint-disable-next-line eqeqeq
+      if (this.isAdmin == 0) {
+        this.$modal.show('form-customer')
+        this.dataBill = bill
+      } else {
+        // eslint-disable-next-line no-unused-expressions
+        bill.method = 1
+        this.createBill(bill).then((data) => {
+          this.clearCart()
         })
-        this.productsOrders = []
-        this.total = 0
-        this.subTotal = 0
-        this.discount = 0
-      })
+      }
     },
   },
 }
@@ -241,7 +254,18 @@ export default {
 .disabled {
   background-color: gray !important;
 }
+.catergory-item {
+  opacity: 0.8;
+}
 .active_type {
   border: 2px solid #2192ff;
+  opacity: 1 !important;
+}
+#hot-deal {
+  opacity: 0.5;
+}
+#hot-deal.active_type {
+  opacity: 1 !important;
+  border: 0 !important;
 }
 </style>

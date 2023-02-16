@@ -25,6 +25,9 @@ export default {
     '~/plugins/axios.js',
     '~/plugins/toast.js',
     '~/plugins/modal.js',
+    '~/plugins/loading-screen.js',
+    '~/plugins/toast.js',
+    '~/plugins/sketon.js',
     '~/plugins/vee-validate.js',
   ],
 

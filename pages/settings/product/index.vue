@@ -36,6 +36,7 @@
   // eslint-disable-next-line no-unused-vars
   import { mapActions } from 'vuex'
   export default {
+    middleware: 'check-auth',
     data() {
       return {
         productSelected:{},

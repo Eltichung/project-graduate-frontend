@@ -1,4 +1,4 @@
 const state = () => ({
-  fee: 0
+  isAdmin: 0
 })
 export default state

@@ -1,5 +1,5 @@
 export default {
-  SET_FEE(state, data) {
-    state.fee = data
+  SET_ADMIN(state,data) {
+    state.isAdmin = data
   }
 }

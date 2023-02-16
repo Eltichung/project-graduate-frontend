@@ -1,4 +1,5 @@
 import api from '~/ultis/api'
+import  helper  from '~/ultis/helper'
 export default {
   getType({ commit }) {
     return new Promise((resolve, reject) => {
@@ -9,6 +10,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -18,9 +20,11 @@ export default {
         .delete(`${api.API_DELETE_TYPE}/${slug}`)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -30,9 +34,11 @@ export default {
         .delete(`${api.API_ADD_TYPE}`, data)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -42,9 +48,11 @@ export default {
         .post(`${api.API_UPDATE_TYPE}`,data)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -58,6 +66,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -67,9 +76,11 @@ export default {
         .get(api.API_GET_ALL_PRODUCT)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -82,6 +93,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -94,6 +106,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -103,9 +116,11 @@ export default {
         .delete(`${api.API_DELETE_PRODUCT}/${slug}`)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -115,9 +130,11 @@ export default {
         .post(`${api.API_UPDATE_PRODUCT}`,data)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -127,9 +144,11 @@ export default {
         .post(`${api.API_ADD_PRODUCT}`,data)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -140,9 +159,11 @@ export default {
         .post(api.API_CREATE_BILL,data)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -155,6 +176,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -164,9 +186,11 @@ export default {
         .get(`${api.API_GET_DETAIL_BILL}/id_bill=${idBill}`)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },
@@ -176,9 +200,11 @@ export default {
         .get(`${api.API_GET_BILL_BY_STATUS}/status=${status}`)
         .then((response) => {
           resolve(response)
+           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
+          helper.callApiErr()
         })
     })
   },

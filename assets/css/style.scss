@@ -402,6 +402,7 @@ button
                 padding: 10px 12px;
                 min-width: 150px;
                 text-align: center;
+                font-size: 150%;
                 button
                 {
                     padding: 8px 30px;
@@ -552,7 +553,7 @@ button
 }
 .err
 {
-    color: red;
+    color: red !important;
     margin-left: 10px;
 }
 #hot-deal
