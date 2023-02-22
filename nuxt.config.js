@@ -53,4 +53,7 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL
   },
+  env: {
+    PUSHER_KEY: process.env.PUSHER_KEY
+  },
 }

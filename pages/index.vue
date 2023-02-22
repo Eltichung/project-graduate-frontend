@@ -108,13 +108,13 @@
         </button>
       </div>
     </div>
-    <InforCustomer :dataBill="dataBill" @clearCart="clearCart"/>
+    <InforCustomer :dataBill="dataBill" @clearCart="clearCart" />
   </div>
 </template>
-
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapState, mapActions } from 'vuex'
+import  pusher  from '~/service/pusher'
 export default {
   name: 'IndexPage',
   middleware: 'check-auth',
@@ -163,6 +163,9 @@ export default {
   created() {
     this.getDataType()
     this.getDataProduct()
+  },
+  mounted() {
+    pusher.noti()
   },
   methods: {
     ...mapActions({
