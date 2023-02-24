@@ -54,6 +54,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+import constant from '~/ultis/constant'
 export default {
   props: ['dataBill'],
   data() {
@@ -72,7 +73,8 @@ export default {
       this.$modal.hide('form-customer')
       const bill = {
         ...this.dataBill,
-        method: 2,
+        status: constant.STATUS_BILL.confirm,
+        method: constant.METHOD.online,
         name: this.inforCustommer.name,
         phone: this.inforCustommer.phone,
         address: this.inforCustommer.address,

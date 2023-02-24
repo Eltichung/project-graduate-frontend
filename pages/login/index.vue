@@ -160,8 +160,8 @@ img {
     center scroll;
   background-size: cover;
   float: left;
-  -webkit-animation: bgslide 2.3s forwards;
-  animation: bgslide 2.3s forwards;
+  -webkit-animation: bgslide 1.3s forwards;
+  animation: bgslide 1.3s forwards;
 }
 .bg-illustration img {
   width: 248px;
@@ -366,8 +366,8 @@ img {
     float: none;
     background: url('https://i.ibb.co/rwncw7s/bg-mobile.png') center center;
     background-size: cover;
-    -webkit-animation: slideIn 0.8s ease-in-out forwards;
-    animation: slideIn 0.8s ease-in-out forwards;
+    -webkit-animation: slideIn 0.1s ease-in-out forwards;
+    animation: slideIn 0.1s ease-in-out forwards;
     width: 100%;
     height: 190px;
     text-align: center;

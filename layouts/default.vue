@@ -19,8 +19,9 @@
             ><div class="nav-menu-img">
               <img src="/img/bill.png" alt="" />
             </div>
-            <p>Bill</p></nuxt-link
+            <p>Bill</p><p id="noti">1</p></nuxt-link
           >
+          
         </li>
         <li v-if="!!isAdmin" class="center-xs">
           <nuxt-link to="/stat"

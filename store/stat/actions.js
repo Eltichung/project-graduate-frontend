@@ -7,7 +7,6 @@ export default {
         .get(`${api.API_STAT_TODAY}/${date}`)
         .then((response) => {
           resolve(response)
-          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -21,7 +20,6 @@ export default {
         .get(`${api.API_STAT_BY_DATE}/startTime=${date.startTime}&&endTime=${date.endTime}`)
         .then((response) => {
           resolve(response)
-          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)

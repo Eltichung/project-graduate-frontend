@@ -186,7 +186,6 @@ export default {
         .get(`${api.API_GET_DETAIL_BILL}/id_bill=${idBill}`)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -200,7 +199,6 @@ export default {
         .get(`${api.API_GET_BILL_BY_STATUS}/status=${status}`)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)

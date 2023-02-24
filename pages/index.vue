@@ -37,7 +37,7 @@
         :key="item.id"
         class="product-item"
       >
-        <img src="/img/anh.jpg" alt="" />
+        <img :src="item.imgUrl" alt="" />
         <h3 class="product-item-name">{{ item.name }}</h3>
         <div class="product-item-price">
           <h3 class="red">$ {{ item.price }}</h3>
@@ -65,7 +65,7 @@
           class="order-product-item"
         >
           <div class="product-img">
-            <img src="" alt="" />
+            <img :src="item.imgUrl" alt="" />
           </div>
           <div class="product-infor">
             <h2 class="product-infor-text">{{ item.name }}</h2>
@@ -115,6 +115,7 @@
 // eslint-disable-next-line no-unused-vars
 import { mapState, mapActions } from 'vuex'
 import  pusher  from '~/service/pusher'
+import constant from '~/ultis/constant'
 export default {
   name: 'IndexPage',
   middleware: 'check-auth',
@@ -233,7 +234,6 @@ export default {
       // eslint-disable-next-line prefer-const
       let bill = {
         total: this.total,
-        status: 1,
         location: this.location,
         arr_product: arrProduct,
       }
@@ -243,7 +243,8 @@ export default {
         this.dataBill = bill
       } else {
         // eslint-disable-next-line no-unused-expressions
-        bill.method = 1
+        bill.status = constant.STATUS_BILL.success
+        bill.method = constant.METHOD.offline
         this.createBill(bill).then((data) => {
           this.clearCart()
         })

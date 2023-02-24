@@ -23,6 +23,7 @@ a
 li
 {
     list-style: none;
+    position: relative;
 }
 img
 {
@@ -71,6 +72,11 @@ button
             &:hover
             {
                 background-color:$hover-color;
+                #noti
+                {
+                    background-color: #E5E7EB;
+                    color: #000;
+                }
             }
             p
             {
@@ -269,7 +275,12 @@ button
             {
                 height: 80px;
                 width: 80px;
-                background-color:red;
+                // background-color:red;
+                img
+                {
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
             .product-infor
             {
@@ -470,7 +481,25 @@ button
     bottom: 2px;
     left: 2px;
   }
-  
+  .nav-menu-img
+  {
+    position: relative;
+  }
+#noti
+{
+    display: inline-block;
+    background-color: $hover-color;
+    padding: 4px 7px;
+    border-radius: 50%;
+    position: absolute;
+    left: 70%;
+    top: 0;
+}
+.modal .btn button
+{
+    height: unset !important;
+    width:  unset !important;
+} 
 .modal
 {
     color: #000;
@@ -494,6 +523,11 @@ button
 {
     background-color: #36A9AE !important;
 }
+// .nuxt-link-exact-active  
+// {
+//     display: block;
+//     background-color: red !important;
+// }
 .form
 {
     background: #ffff;

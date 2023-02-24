@@ -22,44 +22,52 @@
             <button class="btn-update" @click="editProduct(item)">
               Update
             </button>
-            <button @click="deleteItem(item.id)">Delete</button>
+            <button @click="confirm(item.id)">Delete</button>
           </td>
         </tr>
       </table>
     </div>
     <AddProduct :productSelected="productSelected" />
+    <PopupConfirm :callBack="deleteItem(idProductDelete)" />
   </div>
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapActions } from 'vuex'
+import PopupConfirm from '~/components/PopupConfirm.vue'
 export default {
-  middleware: 'check-auth',
-  data() {
-    return {
-      productSelected: {},
-      type: [],
-    }
-  },
-  created() {
-    this.loadData()
-    this.$modal.show('form-product')
-  },
-  methods: {
-    ...mapActions('home', ['getType']),
-    loadData() {
-      this.getType().then((data) => (this.type = data.data.data))
+    middleware: "check-auth",
+    data() {
+        return {
+            idProductDelete: null,
+            productSelected: {},
+            type: [],
+        };
     },
-    deleteItem(id) {
-      this.deleteProduct(id).then((data) => {
-        this.loadData()
-      })
+    created() {
+        this.loadData();
+        this.$modal.show("form-product");
     },
-    editProduct(item) {
-      this.$modal.show('form-type')
-      this.productSelected = item
+    methods: {
+        ...mapActions("home", ["getType"]),
+        confirm(id)
+        {
+          this.idProductDelete = id
+        },
+        loadData() {
+            this.getType().then((data) => (this.type = data.data.data));
+        },
+        deleteItem(id) {
+            this.deleteProduct(id).then((data) => {
+                this.loadData();
+            });
+        },
+        editProduct(item) {
+            this.$modal.show("form-type");
+            this.productSelected = item;
+        },
     },
-  },
+    components: { PopupConfirm }
 }
 </script>
 <style scoped>

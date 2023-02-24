@@ -30,6 +30,7 @@
 // eslint-disable-next-line no-unused-vars
 import { mapActions } from 'vuex'
 import moment from 'moment' 
+import constant from '~/ultis/constant'
 export default {
   data() {
     return {
@@ -41,10 +42,16 @@ export default {
         idBill : 0,
       },
       isActive: true,
-      currentTab: 1
+      currentTab: 1,
+      confirm: 0,
+      success: 0,
+      cancel: 0,
     }
   },
   created() {
+    this.confirm = constant.STATUS_BILL.confirm
+    this.success = constant.STATUS_BILL.success
+    this.cancel = constant.STATUS_BILL.cancel
     this.loadData(1)
     this.$modal.show('detailOrder')
   },
