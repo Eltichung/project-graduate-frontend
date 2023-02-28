@@ -17,5 +17,6 @@ const api = {
   API_GET_BILL_BY_STATUS: 'admin/filterStatusBill',
   API_STAT_TODAY: 'admin/statToday',
   API_STAT_BY_DATE: 'admin/statByDate',
+  API_NOTI: 'noti',
 }
 export default api

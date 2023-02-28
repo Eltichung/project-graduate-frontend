@@ -158,6 +158,16 @@ export default {
       this.$axios
         .post(api.API_CREATE_BILL,data)
         .then((response) => {
+          this.$axios
+          .get(api.API_NOTI)
+          .then((response) => {
+            resolve(response)
+          })
+          .catch((error) => {
+            reject(error)
+            helper.callApiErr('noti fails')
+          })
+          
           resolve(response)
            helper.callApiSusscess()
         })
