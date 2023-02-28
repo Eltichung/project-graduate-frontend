@@ -1,4 +1,6 @@
 import Pusher from 'pusher-js'
+// import home from '~/store/home/index'
+import constant from '~/ultis/constant'
 export default {
   noti() {
     Pusher.logToConsole = true
@@ -9,7 +11,8 @@ export default {
     // eslint-disable-next-line no-var
     var channel = pusher.subscribe('order')
     channel.bind('noti', function (data) {
-      console.log(JSON.stringify(data))
+      // home.action(getBillByMethod(constant.METHOD.online))
+      this.$store.dispatch('home/getBillByMethod', constant.METHOD.online)
     })
   }
 }

@@ -1,7 +1,6 @@
 <!-- eslint-disable prefer-const -->
 <template>
   <div class="wrapper">
-    <img src="http://127.0.0.1:8000/public/images/9T8c4TKaXlnq3Vfw25Z6hrqfuSp10rhGrxlmYCUG.jpg*" alt="">
     <div class="header box between-xs middle-xs">
       <div class="header-text">
         <h1>Pokecho Restaurant</h1>
@@ -115,7 +114,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapState, mapActions } from 'vuex'
-import  pusher  from '~/service/pusher'
+// import  pusher  from '~/service/pusher'
 import constant from '~/ultis/constant'
 export default {
   name: 'IndexPage',
@@ -166,9 +165,9 @@ export default {
     this.getDataType()
     this.getDataProduct()
   },
-  mounted() {
-    pusher.noti()
-  },
+  // mounted() {
+  //   pusher.noti()
+  // },
   methods: {
     ...mapActions({
       getType: 'home/getType',

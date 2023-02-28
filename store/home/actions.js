@@ -1,5 +1,5 @@
 import api from '~/ultis/api'
-import  helper  from '~/ultis/helper'
+import helper from '~/ultis/helper'
 export default {
   getType({ commit }) {
     return new Promise((resolve, reject) => {
@@ -14,13 +14,13 @@ export default {
         })
     })
   },
-  deleteType({ commit },slug) {
+  deleteType({ commit }, slug) {
     return new Promise((resolve, reject) => {
       this.$axios
         .delete(`${api.API_DELETE_TYPE}/${slug}`)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -28,13 +28,13 @@ export default {
         })
     })
   },
-  addType({ commit },data) {
+  addType({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .delete(`${api.API_ADD_TYPE}`, data)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -42,13 +42,13 @@ export default {
         })
     })
   },
-  updateType({ commit },data) {
+  updateType({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(`${api.API_UPDATE_TYPE}`,data)
+        .post(`${api.API_UPDATE_TYPE}`, data)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -56,7 +56,7 @@ export default {
         })
     })
   },
-// product
+  // product
   getProduct({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
@@ -76,7 +76,7 @@ export default {
         .get(api.API_GET_ALL_PRODUCT)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -84,7 +84,7 @@ export default {
         })
     })
   },
-  searchProduct({ commit },data) {
+  searchProduct({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .get(`${api.API_SEARCH_PRODUCT}/${data}`)
@@ -97,7 +97,7 @@ export default {
         })
     })
   },
-  filterProductByType({ commit },data) {
+  filterProductByType({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .get(`${api.API_FILTER_PRODUCT_BY_TYPE}/${data}`)
@@ -110,13 +110,13 @@ export default {
         })
     })
   },
-  deleteProduct({ commit },slug) {
+  deleteProduct({ commit }, slug) {
     return new Promise((resolve, reject) => {
       this.$axios
         .delete(`${api.API_DELETE_PRODUCT}/${slug}`)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -124,13 +124,13 @@ export default {
         })
     })
   },
-  updateProduct({ commit },data) {
+  updateProduct({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(`${api.API_UPDATE_PRODUCT}`,data)
+        .post(`${api.API_UPDATE_PRODUCT}`, data)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -138,13 +138,13 @@ export default {
         })
     })
   },
-  addProduct({ commit },data) {
+  addProduct({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(`${api.API_ADD_PRODUCT}`,data)
+        .post(`${api.API_ADD_PRODUCT}`, data)
         .then((response) => {
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -152,24 +152,24 @@ export default {
         })
     })
   },
-// bill
-  createBill({ commit },data) {
+  // bill
+  createBill({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .post(api.API_CREATE_BILL,data)
+        .post(api.API_CREATE_BILL, data)
         .then((response) => {
           this.$axios
-          .get(api.API_NOTI)
-          .then((response) => {
-            resolve(response)
-          })
-          .catch((error) => {
-            reject(error)
-            helper.callApiErr('noti fails')
-          })
-          
+            .get(api.API_NOTI)
+            .then((response) => {
+              resolve(response)
+            })
+            .catch((error) => {
+              reject(error)
+              helper.callApiErr('noti fails')
+            })
+
           resolve(response)
-           helper.callApiSusscess()
+          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -177,7 +177,7 @@ export default {
         })
     })
   },
-  getBill({ commit },status) {
+  getBill({ commit }, status) {
     return new Promise((resolve, reject) => {
       this.$axios
         .get(`${api.API_GET_BILL}/status=${status}`)
@@ -209,6 +209,20 @@ export default {
         .get(`${api.API_GET_BILL_BY_STATUS}/status=${status}`)
         .then((response) => {
           resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+          helper.callApiErr()
+        })
+    })
+  },
+  getBillByMethod({ commit }, method) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get(`${api.API_GET_BILL_BY_METHOD}/method=${method}`)
+        .then((response) => {
+          resolve(response)
+          // commit('GET_BILL_BY_METHOD', response.data.data)
         })
         .catch((error) => {
           reject(error)
