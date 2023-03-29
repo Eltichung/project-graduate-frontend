@@ -39,7 +39,6 @@ button
     flex-direction: column;
     align-items: center;
     position: fixed;
-    padding: 0 8px;
     width: 120px;
     height: 100vh;
     top: 0;
@@ -59,28 +58,33 @@ button
     }
     &-menu
     {
+        width: 100%;
         padding-top: 30px;
         li
         {
-            padding: 8px 25px;
             display: flex;
             flex-direction: column;
             gap: 8px;
             cursor: pointer;
-            border-radius: 8px;
             margin:30px 0;
-            &:hover
-            {
-                background-color:$hover-color;
-                #noti
-                {
-                    background-color: #E5E7EB;
-                    color: #000;
-                }
-            }
             p
             {
                 margin-top: 8px;
+            }
+            a
+            {
+                display: block;
+                padding: 8px 25px;
+                border-radius: 8px;
+                &:hover
+                {
+                    background-color:$hover-color;
+                    #noti
+                    {
+                        background-color: #E5E7EB;
+                        color: #000;
+                    }
+                }
             }
         }
     }
@@ -528,6 +532,10 @@ button
 //     display: block;
 //     background-color: red !important;
 // }
+.nuxt-link-exact-active.nuxt-link-active 
+{
+    background-color:$hover-color;
+}
 .form
 {
     background: #ffff;
@@ -612,7 +620,7 @@ button
         {
             background-color: $secondary-color;
             border-radius: 15px;
-            flex: 1;
+            width: 350px;
             padding: 30px 60px;
             h1
             {
@@ -665,6 +673,10 @@ button
                 }
             }
         }
+        .box-stat1
+        {
+            flex: 3;
+        }
         .box-chart
         {
 
@@ -712,4 +724,9 @@ button
             }
         }
     }
+}
+.mx-input-wrapper input
+{
+    color: #fff !important;
+    background-color: #1f2029 !important;
 }

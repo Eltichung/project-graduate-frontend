@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper bill">
     <div class="box-header">
-      <h1 class="title" :class="{active:currentTab === 1}" @click="loadData(1)" >Confirm</h1>
-      <h1 class="title" :class="{active:currentTab === 2}" @click="loadData(2)" >Sussceeful</h1>
+      <h1 class="title" :class="{active:currentTab === 1}" @click="loadData(1)" >Waiting</h1>
+      <h1 class="title" :class="{active:currentTab === 2}" @click="loadData(2)" >Successful</h1>
       <h1 class="title" :class="{active:currentTab === 3}" @click="loadData(3)" >Cancel</h1>
     </div>
     <div class="box-content">
@@ -12,6 +12,7 @@
           <th>Total</th>
           <th>Date</th>
           <th></th>
+          <th v-if="currentTab === 1">Handle</th>
         </tr>
         <tr v-for="item in dataBill" :key="item.id">
           <td>{{ item.id }}</td>
@@ -19,6 +20,10 @@
           <td>{{ convertDate(item.created_at) }}</td>
           <td>
             <button @click="showProduct(item.id)">Product</button>
+          </td>
+          <td class="btn-bill" v-if="currentTab === 1">
+            <img src="/img/checked1.png" alt="" @click="confirmBill(item.id)">
+            <img src="/img/cancel.png" alt="" @click="cancelBill(item.id)">
           </td>
         </tr>
       </table>
@@ -56,7 +61,7 @@ export default {
     this.$modal.show('detailOrder')
   },
   methods: {
-    ...mapActions('home', ['getBill','getDetailBill','getBillByStatus']),
+    ...mapActions('home', ['getBill','getDetailBill','getBillByStatus', 'updateStatusBill']),
     loadData(status) {
         this.currentTab = status
       this.getBill(status).then((data) => (this.dataBill = data.data.data))
@@ -73,6 +78,25 @@ export default {
             this.productOrder.idBill=data.data.id_bill
         })
     },
+    confirmBill(id)
+    {
+      const param = {
+        id: id,
+        status: constant.STATUS_BILL.success
+      }
+      console.log(param)
+      this.updateStatusBill(param)
+      .then(data => this.loadData(1))
+    },
+    cancelBill(id)
+    {
+      const param = {
+        id: id,
+        status: constant.STATUS_BILL.cancel
+      }
+      this.updateStatusBill(param)
+      .then(data => this.loadData(1))
+    }
   },
 }
 </script>
@@ -84,5 +108,18 @@ export default {
 {
     opacity: 0.4;
     cursor: pointer;
+}
+.btn-bill
+{
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+.btn-bill img
+{
+  width: 35px;
+  object-fit: cover;
+  height: 35px;
+  cursor: pointer;
 }
 </style>

@@ -17,18 +17,18 @@
         <tr v-for="item in type" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.imgUrl }}</td>
+          <td><img :src="item.imgUrl" alt=""></td>
           <td class="btn-edit">
             <button class="btn-update" @click="editProduct(item)">
               Update
             </button>
-            <button @click="confirm(item.id)">Delete</button>
+            <button @click="deleteItem(item.id)">Delete</button>
           </td>
         </tr>
       </table>
     </div>
-    <AddProduct :productSelected="productSelected" />
-    <PopupConfirm :callBack="deleteItem(idProductDelete)" />
+    <AddType :productSelected="productSelected" @loadData = 'loadData'/>
+    <PopupConfirm />
   </div>
 </template>
 <script>
@@ -36,52 +36,60 @@
 import { mapActions } from 'vuex'
 import PopupConfirm from '~/components/PopupConfirm.vue'
 export default {
-    middleware: "check-auth",
-    data() {
-        return {
-            idProductDelete: null,
-            productSelected: {},
-            type: [],
-        };
+  middleware: "check-auth",
+  data() {
+    return {
+      idProductDelete: null,
+      productSelected: {},
+      type: [],
+    };
+  },
+  created() {
+    this.loadData();
+  },
+  methods: {
+    ...mapActions("home", ["getType", 'deleteType']),
+    confirm(id) {
+      this.idProductDelete = id
     },
-    created() {
-        this.loadData();
-        this.$modal.show("form-product");
+    loadData() {
+      this.$modal.hide("form-type");
+      this.getType().then((data) => (this.type = data.data.data));
     },
-    methods: {
-        ...mapActions("home", ["getType"]),
-        confirm(id)
-        {
-          this.idProductDelete = id
-        },
-        loadData() {
-            this.getType().then((data) => (this.type = data.data.data));
-        },
-        deleteItem(id) {
-            this.deleteProduct(id).then((data) => {
-                this.loadData();
-            });
-        },
-        editProduct(item) {
-            this.$modal.show("form-type");
-            this.productSelected = item;
-        },
+    deleteItem(id) {
+      this.deleteType(id).then((data) => {
+        this.loadData()
+      });
     },
-    components: { PopupConfirm }
+    editProduct(item) {
+      this.productSelected = item;
+      this.$modal.show("form-type");
+    },
+  },
+  components: { PopupConfirm }
 }
 </script>
 <style scoped>
 .active {
   opacity: 1 !important;
 }
+
 .title {
   opacity: 0.4;
   cursor: pointer;
 }
+
 td:last-child {
   width: 300px;
 }
+
 th:last-child {
   width: 300px;
+}
+
+td img {
+  width: 50px;
+  object-fit: cover;
+  height: 50px;
 }
 </style>

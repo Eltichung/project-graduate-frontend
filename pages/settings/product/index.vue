@@ -20,7 +20,7 @@
             <td>{{ item.name }}</td>
             <td>{{ item?.type?.name }}</td>
             <td>{{ item.price }}</td>
-            <td>{{ item.imgUrl }}</td>
+            <td><img :src="item.imgUrl" alt=""></td>
             <td>{{ item.discount }}</td>
             <td class="btn-edit">
               <button class="btn-update" @click="editProduct(item)">Update</button>
@@ -29,7 +29,7 @@
           </tr>
         </table>
       </div>
-      <AddProduct  :productSelected="productSelected"/>
+      <AddProduct  :productSelected="productSelected" @loadData = 'loadData'/>
     </div>
   </template>
   <script>
@@ -51,6 +51,7 @@
       ...mapActions('home', ['getAllProduct', 'deleteProduct']),
       loadData() {
         this.getAllProduct().then((data) => (this.dataProduct = data.data.data))
+        this.$modal.hide('form-product')
       },
       showProduct(id){
           this.$modal.show('detailOrder')
@@ -68,6 +69,7 @@
       editProduct(item){
         this.$modal.show('form-product')
         this.productSelected = item
+        console.log(this.productSelected)
       }
     },
   }
@@ -88,6 +90,16 @@
   th:last-child
   {
     width: 300px;
+  }
+  td img
+  {
+    width: 150px;
+    object-fit: cover;
+    height: 150px;
+  }
+  .img-fluid
+  {
+    position: relative !important;
   }
   </style>
   

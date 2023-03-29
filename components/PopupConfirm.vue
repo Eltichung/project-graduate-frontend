@@ -1,6 +1,6 @@
 <template>
     <modal name="confirm" :adaptive="true">
-        <div class="modal">
+        <div class="modal popup">
             <h3>Are you sure?</h3>
             <div class="btn between-xs">
                 <button @click="confirm">Yes</button>
@@ -10,7 +10,6 @@
     </modal>
 </template>
 <script>
-import { mapActions } from 'vuex'
 export default {
   props: ['callBack'],
     methods: {
@@ -24,7 +23,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.modal {
+.popup.modal {
     img {
         position: absolute;
         top: 10px;
@@ -66,4 +65,5 @@ export default {
             border-radius: 30px;
         }
     }
-}</style>
+}
+</style>

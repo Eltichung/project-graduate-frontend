@@ -13,5 +13,7 @@ module.exports = {
   // add your custom rules here
   rules: {
   'vue/multi-word-component-names': 'off', 
+  "object-shorthand": 0,
+  "object-literal-shorthand": false
   },
 }

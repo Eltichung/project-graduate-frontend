@@ -25,7 +25,7 @@
                     v-for="item in type"
                     :key="item.id"
                     :value="item.id"
-                    >{{ item.name }}</option
+                    >{{ item.name }}</option>
                   >
                 </select>
               </div>
@@ -52,7 +52,7 @@
                 </ValidationProvider>
               </div>
               <div class="form-group file">
-                <img :src="preview" class="img-fluid" />
+                <img :src="preview" class="img-fluid" v-if="preview !== undefined"/>
                 <div class="input-file">
                   <label>Image</label>
                   <input
@@ -79,19 +79,24 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  watch: {
+    productSelected() {
+      this.preview = this.$props.productSelected?.imgUrl
+      this.selected = this.$props.productSelected.type?.id
+    }
+  },
   props: ['productSelected'],
   data() {
     return {
       type: [],
       dataProduct: {},
-      selected: '',
+      selected: 1,
       preview: '',
       image: '',
     }
   },
   created() {
-    this.getDataType()
-    this.selected = this.productSelected?.type?.id
+    this.getDataType() 
   },
   methods: {
     ...mapActions('home', ['getType', 'updateProduct', 'addProduct']),
@@ -106,26 +111,29 @@ export default {
       this.productSelected.type = this.selected
       const formData = new FormData()
       if (this.$refs.file.files[0] != null) {
-        formData.append('imgUrl', this.$refs.file.files[0] || null)
+        formData.append('imgUrl', this.$refs.file.files[0] || this.$props.productSelected?.imgUrl)
+      }
+      else{
+        formData.append('imgUrl', this.$props.productSelected?.imgUrl)
       }
       formData.append('name', this.productSelected.name)
       formData.append('type', this.selected)
       formData.append('description', this.productSelected.description)
       formData.append('price', this.productSelected.price)
-      if (this.productSelected.slug !== '') {
+      console.log(formData)
+      if (this.productSelected.id !== undefined) {
         formData.append('slug', this.productSelected.slug)
-        console.log(formData)
         this.updateProduct(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        }).then((data) => console.log(data))
+        }).then((data) => this.$emit('loadData'))
       } else {
         this.addProduct(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        }).then((data) => console.log(data))
+        }).then((data) => this.$emit('loadData'))
       }
     },
     previewImage(event) {
@@ -140,6 +148,10 @@ export default {
       }
     },
   },
+  mounted()
+  {
+    this.selected = this.productSelected?.type?.id
+  }
 }
 </script>
 <style scoped>
@@ -176,4 +188,5 @@ export default {
   gap: 30px;
   justify-content: center;
 }
+
 </style>

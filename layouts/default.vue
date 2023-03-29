@@ -14,13 +14,13 @@
             <p>Home</p>
           </nuxt-link>
         </li>
-        <li v-if="!!isAdmin" class="center-xs">
+        <li v-if="!!isAdmin" class="center-xs" @click="handler">
           <nuxt-link to="/bill">
             <div class="nav-menu-img">
               <img src="/img/bill.png" alt="" />
             </div>
             <p>Bill</p>
-            <p id="noti" v-if="!!count">{{ billOnline }}</p>
+            <p id="noti"></p>
           </nuxt-link>
 
         </li>
@@ -68,39 +68,53 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import Pusher from 'pusher-js'
-import constant from '~/ultis/constant'
+// import constant from '~/ultis/constant'
 export default {
   watch: {
     count(newValue) {
-      this.$store.commit('home/SET_COUNT_BILL', newValue)
+      this.SET_COUNT_BILL(newValue)
     }
   },
   data() {
     return {
-      count: 0
+      isShow: false,
+      count: 0,
     }
   },
   middleware: 'check-auth',
   computed: {
     ...mapState('home', ['isAdmin', 'billOnline']),
   },
-  created() {
-    this.getBillByMethod(constant.METHOD.online)
-      .then(data => {
-        this.count = data.data.data.length
-      })
-  },
   methods: {
+    ...mapMutations('home',['SET_COUNT_BILL']),
     ...mapActions('home', ['getBillByMethod']),
     logout() {
       localStorage.removeItem('token')
       this.$axios.setHeader('Authorization', '')
       this.$router.push('/')
     },
+    handler() {
+      const tagP = document.querySelector('#noti');
+    if(tagP !== null)
+    {
+      console.log('a')
+      tagP.style.display = 'none';
+    }
+    }
   },
   mounted() {
+    const checkAdmin = this.isAdmin
+    const tagP = document.querySelector('#noti');
+    if(tagP !== null)
+    {
+      tagP.style.display = 'none';
+    }
+    if(checkAdmin === 1)
+    {
+      tagP.style.display = 'none !important';
+    }
     // Pusher.logToConsole = true
     // eslint-disable-next-line no-var
     var pusher = new Pusher(process.env.PUSHER_KEY, {
@@ -109,8 +123,10 @@ export default {
     // eslint-disable-next-line no-var
     var channel = pusher.subscribe('order')
     channel.bind('noti', function (data) {
-      this.count = data.length
-      console.log(data.length)
+        const bill = document.querySelector('#noti')
+        bill.textContent = 'New'  
+        bill.style.display = 'block'  
+        
     })
   }
 }

@@ -54,13 +54,15 @@
           </div>
         </div>
       </div>
-      <date-picker v-model="time" range></date-picker>
-      <chart
-        v-if="loader"
-        class="box-chart"
-        :data="dataChart"
-        :options="optionsChart"
-      />
+      <div class="box-stat1">
+        <date-picker v-model="time" range placeholder="Select date"></date-picker>
+        <chart
+          v-if="loader"
+          class="box-chart"
+          :data="dataChart"
+          :options="optionsChart"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -153,7 +155,7 @@ export default {
             {
               label: 'VND',
               backgroundColor: '#3e95cd',
-              data: data.data.map((element) => element.total),
+              data: data.data.map((element) => parseInt(element.total)),
             },
           ],
         }

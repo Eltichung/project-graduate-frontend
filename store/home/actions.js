@@ -31,7 +31,7 @@ export default {
   addType({ commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .delete(`${api.API_ADD_TYPE}`, data)
+        .post(`${api.API_ADD_TYPE}`, data)
         .then((response) => {
           resolve(response)
           helper.callApiSusscess()
@@ -76,7 +76,6 @@ export default {
         .get(api.API_GET_ALL_PRODUCT)
         .then((response) => {
           resolve(response)
-          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -153,21 +152,23 @@ export default {
     })
   },
   // bill
-  createBill({ commit }, data) {
+  createBill({ state,commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .post(api.API_CREATE_BILL, data)
         .then((response) => {
-          this.$axios
-            .get(api.API_NOTI)
-            .then((response) => {
-              resolve(response)
-            })
-            .catch((error) => {
-              reject(error)
-              helper.callApiErr('noti fails')
-            })
-
+          if(state.isAdmin === 0)
+          {
+            this.$axios
+              .get(api.API_NOTI)
+              .then((response) => {
+                resolve(response)
+              })
+              .catch((error) => {
+                reject(error)
+                helper.callApiErr('noti fails')
+              })
+          }
           resolve(response)
           helper.callApiSusscess()
         })
@@ -226,7 +227,19 @@ export default {
         })
         .catch((error) => {
           reject(error)
-          helper.callApiErr()
+        })
+    })
+  },
+  updateStatusBill({ commit }, param) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(api.API_UPDATE_STATUS_BILL, param)
+        .then((response) => {
+          helper.callApiSusscess()
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
         })
     })
   },

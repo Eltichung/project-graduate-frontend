@@ -19,7 +19,7 @@
                 </ValidationProvider>
               </div>
               <div class="form-group file">
-                <img :src="preview" class="img-fluid" />
+                <img :src="preview" class="img-fluid" v-if="preview !== undefined"/>
                 <div class="input-file">
                   <label>Image</label>
                   <input
@@ -46,6 +46,11 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  watch: {
+    productSelected() {
+      this.preview = this.$props.productSelected?.imgUrl
+    }
+  },
   props: ['productSelected'],
   data() {
     return {
@@ -55,31 +60,31 @@ export default {
       image: '',
     }
   },
-  created() {},
   methods: {
     ...mapActions('home', ['getType', 'updateType', 'addType']),
     close() {
       this.$modal.hide('form-type')
     },
     submit() {
+      console.log(this.productSelected.id)
       // eslint-disable-next-line vue/no-mutating-props
       const formData = new FormData()
       if (this.$refs.file.files[0] != null) {
         formData.append('imgUrl', this.$refs.file.files[0] || null)
       }
       formData.append('name', this.productSelected.name)
-      if (this.productSelected.slug !== '') {
-        this.updateProduct(formData, {
+      if (this.productSelected.id !== undefined) {
+        this.updateType(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        }).then((data) => console.log(data))
+        }).then((data) => this.$emit('loadData'))
       } else {
-        this.addProduct(formData, {
+        this.addType(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        }).then((data) => console.log(data))
+        }).then((data) => this.$emit('loadData'))
       }
     },
     previewImage(event) {
