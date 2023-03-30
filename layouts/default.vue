@@ -57,10 +57,12 @@
           </nuxt-link>
         </li>
         <li v-else class="center-xs">
-          <div class="nav-menu-img" @click="logout">
-            <img src="/img/user.png" alt="" />
-          </div>
-          <p>Custommer</p>
+          <nuxt-link to="#">
+            <div class="nav-menu-img" @click="logout">
+              <img src="/img/user.png" alt="" />
+            </div>
+            <p>Custommer</p>
+          </nuxt-link>
         </li>
       </ul>
     </nav>
