@@ -61,7 +61,7 @@
             <div class="nav-menu-img" @click="logout">
               <img src="/img/user.png" alt="" />
             </div>
-            <p>Custommer</p>
+            <p>Customer</p>
           </nuxt-link>
         </li>
       </ul>
@@ -93,9 +93,9 @@ export default {
     ...mapMutations('home',['SET_COUNT_BILL']),
     ...mapActions('home', ['getBillByMethod']),
     logout() {
-      localStorage.removeItem('token')
-      this.$axios.setHeader('Authorization', '')
       this.$router.push('/')
+      this.$axios.setHeader('Authorization', undefined);
+      localStorage.removeItem('token')
     },
     handler() {
       const tagP = document.querySelector('#noti');

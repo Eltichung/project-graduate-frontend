@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper bill">
     <div class="box-header">
-      <h1 class="title"></h1>
+      <h1 class="title">Type</h1>
     </div>
     <div class="box-content">
       <button class="btn-add" role="button" @click="editProduct({})">
