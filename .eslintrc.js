@@ -12,8 +12,8 @@ module.exports = {
   plugins: [],
   // add your custom rules here
   rules: {
-  'vue/multi-word-component-names': 'off', 
-  "object-shorthand": 0,
-  "object-literal-shorthand": 0
+    'vue/multi-word-component-names': 'off',
+    'object-shorthand': 0,
+    'object-literal-shorthand': 0,
   },
 }

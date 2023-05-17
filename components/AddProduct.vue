@@ -21,11 +21,9 @@
               <div class="form-group">
                 <label for="">Type</label>
                 <select id="select" v-model="selected">
-                  <option
-                    v-for="item in type"
-                    :key="item.id"
-                    :value="item.id"
-                    >{{ item.name }}</option>
+                  <option v-for="item in type" :key="item.id" :value="item.id">
+                    {{ item.name }}
+                  </option>
                   >
                 </select>
               </div>
@@ -52,7 +50,11 @@
                 </ValidationProvider>
               </div>
               <div class="form-group file">
-                <img :src="preview" class="img-fluid" v-if="preview !== undefined"/>
+                <img
+                  :src="preview"
+                  class="img-fluid"
+                  v-if="preview !== undefined"
+                />
                 <div class="input-file">
                   <label>Image</label>
                   <input
@@ -83,7 +85,7 @@ export default {
     productSelected() {
       this.preview = this.$props.productSelected?.imgUrl
       this.selected = this.$props.productSelected.type?.id
-    }
+    },
   },
   props: ['productSelected'],
   data() {
@@ -96,7 +98,7 @@ export default {
     }
   },
   created() {
-    this.getDataType() 
+    this.getDataType()
   },
   methods: {
     ...mapActions('home', ['getType', 'updateProduct', 'addProduct']),
@@ -111,9 +113,11 @@ export default {
       this.productSelected.type = this.selected
       const formData = new FormData()
       if (this.$refs.file.files[0] != null) {
-        formData.append('imgUrl', this.$refs.file.files[0] || this.$props.productSelected?.imgUrl)
-      }
-      else{
+        formData.append(
+          'imgUrl',
+          this.$refs.file.files[0] || this.$props.productSelected?.imgUrl
+        )
+      } else {
         formData.append('imgUrl', this.$props.productSelected?.imgUrl)
       }
       formData.append('name', this.productSelected.name)
@@ -148,10 +152,9 @@ export default {
       }
     },
   },
-  mounted()
-  {
+  mounted() {
     this.selected = this.productSelected?.type?.id
-  }
+  },
 }
 </script>
 <style scoped>
@@ -188,5 +191,4 @@ export default {
   gap: 30px;
   justify-content: center;
 }
-
 </style>

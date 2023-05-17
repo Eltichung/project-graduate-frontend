@@ -19,7 +19,11 @@
                 </ValidationProvider>
               </div>
               <div class="form-group file">
-                <img :src="preview" class="img-fluid" v-if="preview !== undefined"/>
+                <img
+                  :src="preview"
+                  class="img-fluid"
+                  v-if="preview !== undefined"
+                />
                 <div class="input-file">
                   <label>Image</label>
                   <input
@@ -49,7 +53,7 @@ export default {
   watch: {
     productSelected() {
       this.preview = this.$props.productSelected?.imgUrl
-    }
+    },
   },
   props: ['productSelected'],
   data() {

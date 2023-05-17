@@ -22,7 +22,6 @@
             <p>Bill</p>
             <p id="noti"></p>
           </nuxt-link>
-
         </li>
         <li v-if="!!isAdmin" class="center-xs">
           <nuxt-link to="/stat">
@@ -77,12 +76,13 @@ export default {
   watch: {
     count(newValue) {
       this.SET_COUNT_BILL(newValue)
-    }
+    },
   },
   data() {
     return {
       isShow: false,
       count: 0,
+      isMenu: true,
     }
   },
   middleware: 'check-auth',
@@ -90,32 +90,29 @@ export default {
     ...mapState('home', ['isAdmin', 'billOnline']),
   },
   methods: {
-    ...mapMutations('home',['SET_COUNT_BILL']),
+    ...mapMutations('home', ['SET_COUNT_BILL']),
     ...mapActions('home', ['getBillByMethod']),
     logout() {
       this.$router.push('/')
-      this.$axios.setHeader('Authorization', undefined);
+      this.$axios.setHeader('Authorization', undefined)
       localStorage.removeItem('token')
     },
     handler() {
-      const tagP = document.querySelector('#noti');
-    if(tagP !== null)
-    {
-      console.log('a')
-      tagP.style.display = 'none';
-    }
-    }
+      const tagP = document.querySelector('#noti')
+      if (tagP !== null) {
+        console.log('a')
+        tagP.style.display = 'none'
+      }
+    },
   },
   mounted() {
     const checkAdmin = this.isAdmin
-    const tagP = document.querySelector('#noti');
-    if(tagP !== null)
-    {
-      tagP.style.display = 'none';
+    const tagP = document.querySelector('#noti')
+    if (tagP !== null) {
+      tagP.style.display = 'none'
     }
-    if(checkAdmin === 1)
-    {
-      tagP.style.display = 'none !important';
+    if (checkAdmin === 1) {
+      tagP.style.display = 'none !important'
     }
     // Pusher.logToConsole = true
     // eslint-disable-next-line no-var
@@ -125,11 +122,10 @@ export default {
     // eslint-disable-next-line no-var
     var channel = pusher.subscribe('order')
     channel.bind('noti', function (data) {
-        const bill = document.querySelector('#noti')
-        bill.textContent = 'New'  
-        bill.style.display = 'block'  
-        
+      const bill = document.querySelector('#noti')
+      bill.textContent = 'New'
+      bill.style.display = 'block'
     })
-  }
+  },
 }
 </script>

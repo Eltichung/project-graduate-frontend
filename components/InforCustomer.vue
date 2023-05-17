@@ -1,17 +1,17 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <modal  name="form-customer" :adaptive="true">
+  <modal name="form-customer" :adaptive="true">
     <div class="modal">
       <div class="box-content modal">
         <div class="form">
           <h1>Product</h1>
-          <ValidationObserver  v-slot="{ handleSubmit }">
+          <ValidationObserver v-slot="{ handleSubmit }">
             <form action="" @submit.prevent="handleSubmit(submit)">
               <div class="form-group">
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Name"
-                  rules="required"
+                  rules="required|max:128"
                 >
                   <label for="">Name</label>
                   <input v-model="inforCustommer.name" type="text" />
@@ -22,7 +22,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Phone"
-                  rules="required"
+                  rules="required|phone"
                 >
                   <label for="">Phone</label>
                   <input v-model="inforCustommer.phone" type="text" />
@@ -33,7 +33,7 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Address"
-                  rules="required"
+                  rules="required|max:128"
                 >
                   <label for="">Address</label>
                   <input v-model="inforCustommer.address" type="text" />
@@ -48,7 +48,6 @@
           </ValidationObserver>
         </div>
       </div>
-      
     </div>
   </modal>
 </template>
@@ -81,9 +80,9 @@ export default {
       }
       this.createBill(bill).then((data) => {
         this.$emit('clearCart')
-        this.inforCustommer.name =''
-        this.inforCustommer.phone =''
-        this.inforCustommer.address =''
+        this.inforCustommer.name = ''
+        this.inforCustommer.phone = ''
+        this.inforCustommer.address = ''
       })
     },
   },

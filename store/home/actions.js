@@ -152,13 +152,12 @@ export default {
     })
   },
   // bill
-  createBill({ state,commit }, data) {
+  createBill({ state, commit }, data) {
     return new Promise((resolve, reject) => {
       this.$axios
         .post(api.API_CREATE_BILL, data)
         .then((response) => {
-          if(state.isAdmin === 0)
-          {
+          if (state.isAdmin === 0) {
             this.$axios
               .get(api.API_NOTI)
               .then((response) => {
@@ -170,7 +169,6 @@ export default {
               })
           }
           resolve(response)
-          helper.callApiSusscess()
         })
         .catch((error) => {
           reject(error)
@@ -235,7 +233,6 @@ export default {
       this.$axios
         .post(api.API_UPDATE_STATUS_BILL, param)
         .then((response) => {
-          helper.callApiSusscess()
           resolve(response)
         })
         .catch((error) => {

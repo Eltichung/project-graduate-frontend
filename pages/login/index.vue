@@ -22,7 +22,11 @@
                 name="email"
                 rules="required|email"
               >
-                <input v-model="email" type="email" placeholder="E-mail Address"/>
+                <input
+                  v-model="email"
+                  type="email"
+                  placeholder="E-mail Address"
+                />
                 <p class="err">{{ errors[0] }}</p>
               </ValidationProvider>
               <ValidationProvider
@@ -30,7 +34,11 @@
                 name="password"
                 rules="required|min:8"
               >
-                <input v-model="password" type="password" placeholder="Password" />
+                <input
+                  v-model="password"
+                  type="password"
+                  placeholder="Password"
+                />
                 <p class="err">{{ errors[0] }}</p>
               </ValidationProvider>
               <div class="remember-form">
@@ -40,7 +48,6 @@
               <div class="forget-pass">
                 <a href="#">Forgot Password ?</a>
               </div>
-
             </form>
           </ValidationObserver>
           <button type="submit" @click="handleSubmit()">LOG-IN</button>
@@ -53,34 +60,32 @@
 import { mapActions } from 'vuex'
 export default {
   layout: 'none',
-  data(){
+  data() {
     return {
-      password:'',
-      email:''
+      password: '',
+      email: '',
     }
   },
-  methods:{
+  methods: {
     ...mapActions('login', ['loginUser']),
-    handleSubmit()
-    {
+    handleSubmit() {
       const user = {
-        email : this.email,
-        password : this.password
+        email: this.email,
+        password: this.password,
       }
-      this.loginUser(user)
-      .then(data=>{
+      this.loginUser(user).then((data) => {
         localStorage.setItem('token', data.data.token)
         this.$axios.setHeader('Authorization', `Bearer ${data.data.token}`)
-        this.$router.push('/') 
+        this.$router.push('/')
       })
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>
 .err {
-    color: red !important;
-    margin-left: 20px;
+  color: red !important;
+  margin-left: 20px;
 }
 input {
   color: #fff !important;
@@ -89,8 +94,7 @@ input {
 ::placeholder {
   color: #fff !important;
 }
-form >span
-{
+form > span {
   display: flex;
   flex-direction: column;
 }
@@ -233,7 +237,7 @@ img {
   padding: 0 30px;
   border-radius: 10px;
 }
-.login .container .login-form  button[type='submit'] {
+.login .container .login-form button[type='submit'] {
   background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
   background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
   background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
@@ -250,10 +254,10 @@ img {
   font-weight: bold;
   font-size: 20px;
 }
-.login .container .login-form  button[type='submit']:hover::after {
+.login .container .login-form button[type='submit']:hover::after {
   opacity: 1;
 }
-.login .container .login-form  button[type='submit']::after {
+.login .container .login-form button[type='submit']::after {
   content: '';
   position: absolute;
   z-index: -1;

@@ -17,7 +17,7 @@
         <tr v-for="item in type" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td><img :src="item.imgUrl" alt=""></td>
+          <td><img :src="item.imgUrl" alt="" /></td>
           <td class="btn-edit">
             <button class="btn-update" @click="editProduct(item)">
               Update
@@ -27,7 +27,7 @@
         </tr>
       </table>
     </div>
-    <AddType :productSelected="productSelected" @loadData = 'loadData'/>
+    <AddType :productSelected="productSelected" @loadData="loadData" />
     <PopupConfirm />
   </div>
 </template>
@@ -36,37 +36,37 @@
 import { mapActions } from 'vuex'
 import PopupConfirm from '~/components/PopupConfirm.vue'
 export default {
-  middleware: "check-auth",
+  middleware: 'check-auth',
   data() {
     return {
       idProductDelete: null,
       productSelected: {},
       type: [],
-    };
+    }
   },
   created() {
-    this.loadData();
+    this.loadData()
   },
   methods: {
-    ...mapActions("home", ["getType", 'deleteType']),
+    ...mapActions('home', ['getType', 'deleteType']),
     confirm(id) {
       this.idProductDelete = id
     },
     loadData() {
-      this.$modal.hide("form-type");
-      this.getType().then((data) => (this.type = data.data.data));
+      this.$modal.hide('form-type')
+      this.getType().then((data) => (this.type = data.data.data))
     },
     deleteItem(id) {
       this.deleteType(id).then((data) => {
         this.loadData()
-      });
+      })
     },
     editProduct(item) {
-      this.productSelected = item;
-      this.$modal.show("form-type");
+      this.productSelected = item
+      this.$modal.show('form-type')
     },
   },
-  components: { PopupConfirm }
+  components: { PopupConfirm },
 }
 </script>
 <style scoped>

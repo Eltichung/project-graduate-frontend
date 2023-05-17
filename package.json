@@ -10,7 +10,8 @@
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:js && npm run lint:prettier",
-    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix"
+    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,vue}\""
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
@@ -18,12 +19,14 @@
     "core-js": "^3.19.3",
     "cxlt-vue2-toastr": "^1.1.1",
     "hchs-vue-charts": "^1.2.8",
+    "html2pdf.js": "^0.9.1",
     "moment": "^2.29.4",
     "nuxt": "^2.15.8",
     "pusher-js": "^8.0.1",
     "vee-validate": "^3.4.14",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.4.0",
+    "vue-html2pdf": "^1.8.0",
     "vue-js-modal": "^2.0.1",
     "vue-loading-skeleton": "^1.1.9",
     "vue-server-renderer": "^2.6.14",

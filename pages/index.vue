@@ -1,121 +1,131 @@
 <!-- eslint-disable prefer-const -->
 <template>
-  <div class="wrapper">
-    <div class="header box between-xs middle-xs">
-      <div class="header-text">
-        <h1>Pokecho Restaurant</h1>
-        <p>au 12th 2020</p>
-      </div>
-      <div class="header-search">
-        <img src="/img/loupe.png" alt="" />
-        <input v-model="nameProduct" type="text" />
-      </div>
-    </div>
-    <div class="catergory content">
-      <div
-        id="hot-deal"
-        class="catergory-item middle-xs center-xs"
-        :class="{ active_type: currentType == -1 }"
-        @click="getDataProduct()"
-      >
-        <img src="/img/hot-deal.png" alt="" />
-      </div>
-      <div
-        v-for="item in type"
-        :key="item.id"
-        class="catergory-item middle-xs center-xs"
-        :class="{ active_type: currentType == item.id }"
-        @click="filterProduct(item.id)"
-      >
-        <img src="/img/loupe.png" alt="" />
-        <p>{{ item.name }}</p>
-      </div>
-    </div>
-    <div class="product content">
-      <div
-        v-for="(item, index) in products"
-        :key="item.id"
-        class="product-item"
-      >
-        <img :src="item.imgUrl" alt="" />
-        <h3 class="product-item-name">{{ item.name }}</h3>
-        <div class="product-item-price">
-          <h3 class="red">$ {{ item.price }}</h3>
-          <button ref="btnAdd" @click="addProduct(item, index)">
-            <img src="/img/plus.png" alt="" />
-          </button>
+  <div>
+    <BillPdf
+      :productOrder="productsOrders"
+      :totalBill="setTotal"
+      :inforCustommer="inforCustommer"
+      :discount="discount"
+      v-if="isShowPdf"
+      ref="childComponent"
+    />
+    <div class="wrapper" v-else>
+      <div class="header box between-xs middle-xs">
+        <div class="header-text">
+          <h1>Eltic Restaurant</h1>
+          <p>au 12th 2020</p>
+        </div>
+        <div class="header-search">
+          <img src="/img/loupe.png" alt="" />
+          <input v-model="nameProduct" type="text" />
         </div>
       </div>
-    </div>
-    <div class="order">
-      <div class="order-header">
-        <div class="order-header-text">
-          <h2>Order</h2>
-          <select v-model="location" name="">
-            <option v-for="item in 20" :key="item" :value="item">{{
-              item
-            }}</option>
-          </select>
-        </div>
-      </div>
-      <div class="order-product">
+      <div class="catergory content">
         <div
-          v-for="(item, index) in productsOrders"
-          :key="item.id"
-          class="order-product-item"
+          id="hot-deal"
+          class="catergory-item middle-xs center-xs"
+          :class="{ active_type: currentType == -1 }"
+          @click="getDataProduct()"
         >
-          <div class="product-img">
-            <img :src="item.imgUrl" alt="" />
+          <img src="/img/hot-deal.png" alt="" />
+        </div>
+        <div
+          v-for="item in type"
+          :key="item.id"
+          class="catergory-item middle-xs center-xs"
+          :class="{ active_type: currentType == item.id }"
+          @click="filterProduct(item.id)"
+        >
+          <img src="/img/loupe.png" alt="" />
+          <p>{{ item.name }}</p>
+        </div>
+      </div>
+      <div class="product content">
+        <div
+          v-for="(item, index) in products"
+          :key="item.id"
+          class="product-item"
+        >
+          <img :src="item.imgUrl" alt="" />
+          <h3 class="product-item-name">{{ item.name }}</h3>
+          <div class="product-item-price">
+            <h3 class="red">{{ formatNumber(item.price) }}</h3>
+            <button ref="btnAdd" @click="addProduct(item, index)">
+              <img src="/img/plus.png" alt="" />
+            </button>
           </div>
-          <div class="product-infor">
-            <h2 class="product-infor-text">{{ item.name }}</h2>
-            <div class="product-infor-count">
-              <div
-                class="product-infor-count-btn"
-                @click="increase(item, index)"
-              >
-                <img src="/img/plus.png" alt="" />
-              </div>
-              <div class="product-infor-count-input">
-                <p>{{ item.quantity }}</p>
-              </div>
-              <div
-                class="product-infor-count-btn"
-                @click="decrease(item, index)"
-              >
-                <img src="/img/minus.png" alt="" />
+        </div>
+      </div>
+      <div class="order">
+        <div class="order-header">
+          <div class="order-header-text">
+            <h2>Order</h2>
+            <div class="discount" v-if="!!isAdmin">
+              <p>Discount(%)</p>
+              <input type="number" v-model="discount" max="100" />
+            </div>
+          </div>
+        </div>
+        <div class="order-product">
+          <div
+            v-for="(item, index) in productsOrders"
+            :key="item.id"
+            class="order-product-item"
+          >
+            <div class="product-img">
+              <img :src="item.imgUrl" alt="" />
+            </div>
+            <div class="product-infor">
+              <h2 class="product-infor-text">{{ item.name }}</h2>
+              <div class="product-infor-count">
+                <div
+                  class="product-infor-count-btn"
+                  @click="increase(item, index)"
+                >
+                  <img src="/img/plus.png" alt="" />
+                </div>
+                <div class="product-infor-count-input">
+                  <p>{{ item.quantity }}</p>
+                </div>
+                <div
+                  class="product-infor-count-btn"
+                  @click="decrease(item, index)"
+                >
+                  <img src="/img/minus.png" alt="" />
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="order-total">
+          <div class="order-total-item">
+            <p class="gray">Sub Total</p>
+            <p>{{ formatNumber(setSubTotal) }}</p>
+          </div>
+          <div class="order-total-item">
+            <p class="gray">Discount(%)</p>
+            <p>{{ discount }}</p>
+          </div>
+          <div class="order-total-item">
+            <p class="gray">Total</p>
+            <p>{{ formatNumber(setTotal) }}</p>
+          </div>
+          <button @click="orderBill">
+            <img src="" alt="" />
+            <p>Print Bill</p>
+          </button>
+        </div>
       </div>
-      <div class="order-total">
-        <div class="order-total-item">
-          <p class="gray">Sub Total</p>
-          <p>${{ setSubTotal }}</p>
-        </div>
-        <div class="order-total-item">
-          <p class="gray">Discount</p>
-          <p>${{ discount }}</p>
-        </div>
-        <div class="order-total-item">
-          <p class="gray">Total</p>
-          <p>${{ setTotal }}</p>
-        </div>
-        <button @click="orderBill">
-          <img src="" alt="" />
-          <p>Print Bill</p>
-        </button>
-      </div>
+      <InforCustomer :dataBill="dataBill" @clearCart="clearCart" />
     </div>
-    <InforCustomer :dataBill="dataBill" @clearCart="clearCart" />
   </div>
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
 import { mapState, mapActions } from 'vuex'
-// import  pusher  from '~/service/pusher'
+// import html2pdf from 'html2pdf.js'
 import constant from '~/ultis/constant'
+import helpers from '~/ultis/helper'
 export default {
   name: 'IndexPage',
   middleware: 'check-auth',
@@ -134,6 +144,7 @@ export default {
       location: 0,
       inforCustommer: { name: '', phone: '', address: '' },
       dataBill: {},
+      isShowPdf: false,
     }
   },
   computed: {
@@ -160,14 +171,16 @@ export default {
         )
       } else this.getDataProduct()
     },
+    discount(newValue) {
+      if (newValue > 100) {
+        this.discount = 100
+      }
+    },
   },
   created() {
     this.getDataType()
     this.getDataProduct()
   },
-  // mounted() {
-  //   pusher.noti()
-  // },
   methods: {
     ...mapActions({
       getType: 'home/getType',
@@ -222,6 +235,9 @@ export default {
     orderBill() {
       // eslint-disable-next-line prefer-const
       let arrProduct = []
+      if (this.productsOrders.length <= 0) {
+        return false
+      }
       this.productsOrders.forEach((item) => {
         const temp = {
           id_product: item.id,
@@ -237,6 +253,7 @@ export default {
         location: this.location,
         arr_product: arrProduct,
       }
+
       // eslint-disable-next-line eqeqeq
       if (this.isAdmin == 0) {
         this.$modal.show('form-customer')
@@ -245,10 +262,31 @@ export default {
         // eslint-disable-next-line no-unused-expressions
         bill.status = constant.STATUS_BILL.success
         bill.method = constant.METHOD.offline
-        this.createBill(bill).then((data) => {
-          this.clearCart()
-        })
+        this.createBill(bill)
+          .then((data) => {
+            this.isShowPdf = true
+          })
+          .then(() => {
+            this.exportToPDF()
+            this.clearCart()
+            this.isShowPdf = false
+            this.$toast.success('Successful')
+          })
       }
+    },
+    exportToPDF() {
+      // const childComponent = this.$refs.side-bar;
+      // html2pdf(childComponent.$refs.document, {
+      //   margin: 1,
+      //   filename: 'document.pdf',
+      //   image: { type: 'jpeg', quality: 0.98 },
+      //   html2canvas: { dpi: 192, letterRendering: true },
+      //   jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+      // })
+      window.print()
+    },
+    formatNumber(number) {
+      return helpers.formatCost(number)
     },
   },
 }
@@ -258,16 +296,20 @@ export default {
 .disabled {
   background-color: gray !important;
 }
+
 .catergory-item {
-  opacity: 0.8;
+  opacity: 0.5;
 }
+
 .active_type {
   border: 2px solid #2192ff;
   opacity: 1 !important;
 }
+
 #hot-deal {
   opacity: 0.5;
 }
+
 #hot-deal.active_type {
   opacity: 1 !important;
   border: 0 !important;

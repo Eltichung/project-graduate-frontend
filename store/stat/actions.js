@@ -1,5 +1,5 @@
 import api from '~/ultis/api'
-import  helper  from '~/ultis/helper'
+import helper from '~/ultis/helper'
 export default {
   statToday({ commit }, date) {
     return new Promise((resolve, reject) => {
@@ -17,7 +17,9 @@ export default {
   statByDate({ commit }, date) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .get(`${api.API_STAT_BY_DATE}/startTime=${date.startTime}&&endTime=${date.endTime}`)
+        .get(
+          `${api.API_STAT_BY_DATE}/startTime=${date.startTime}&&endTime=${date.endTime}`
+        )
         .then((response) => {
           resolve(response)
         })

@@ -4,6 +4,6 @@ import mutations from './mutations'
 const home = {
   state,
   actions,
-  mutations
+  mutations,
 }
 export default home

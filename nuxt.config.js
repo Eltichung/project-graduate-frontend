@@ -18,7 +18,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/css/style.scss','~/assets/css/flexboxgrid.min.css'],
+  css: ['~/assets/css/style.scss', '~/assets/css/flexboxgrid.min.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -42,18 +42,15 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/axios',
-    "vue-toastification/nuxt",
-  ],
+  modules: ['@nuxtjs/axios', 'vue-toastification/nuxt'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   axios: {
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
   },
   env: {
-    PUSHER_KEY: process.env.PUSHER_KEY
+    PUSHER_KEY: process.env.PUSHER_KEY,
   },
 }

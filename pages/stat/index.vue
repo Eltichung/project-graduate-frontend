@@ -9,12 +9,12 @@
       <!-- <div class="box-stat-item first"></div> -->
       <div class="box-stat-item">
         <p class="box-stat-item-title">Yesterday</p>
-        <h1>{{ dataStatToday.total_yesterday }}</h1>
+        <h1>{{ formatNumber(dataStatToday.total_yesterday) }}</h1>
         <p>VND</p>
       </div>
       <div class="box-stat-item">
         <p class="box-stat-item-title">Now</p>
-        <h1>{{ dataStatToday.total_now }}</h1>
+        <h1>{{ formatNumber(dataStatToday.total_now) }}</h1>
         <p>VND</p>
       </div>
       <div class="box-stat-item">
@@ -36,8 +36,8 @@
             <p>Sold</p>
           </div>
           <div class="total-item">
-            <h3>123</h3>
-            <p>Not sold yet</p>
+            <h3>{{ dateNow }}</h3>
+            <p>Date</p>
           </div>
         </div>
         <div class="list-product">
@@ -55,7 +55,11 @@
         </div>
       </div>
       <div class="box-stat1">
-        <date-picker v-model="time" range placeholder="Select date"></date-picker>
+        <date-picker
+          v-model="time"
+          range
+          placeholder="Select date"
+        ></date-picker>
         <chart
           v-if="loader"
           class="box-chart"
@@ -71,6 +75,7 @@ import { mapActions } from 'vuex'
 import moment from 'moment'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
+import helpers from '~/ultis/helper'
 export default {
   components: { DatePicker },
   middleware: 'check-auth',
@@ -91,12 +96,18 @@ export default {
               ticks: {
                 fontColor: '#fff',
               },
+              gridLines: {
+                color: '#302f2f',
+              },
             },
           ],
           xAxes: [
             {
               ticks: {
                 fontColor: '#fff',
+              },
+              gridLines: {
+                color: '#302f2f',
               },
             },
           ],
@@ -111,15 +122,16 @@ export default {
         maintainAspectRatio: false,
       },
       time: '',
+      dateNow: '',
     }
   },
   watch: {
     time(newValue) {
       this.getDataStatByDate()
-      console.log(this.time)
     },
   },
   created() {
+    this.dateNow = moment(new Date()).format('YYYY-MM-DD')
     this.getDataStatToday()
     this.getDataStatByDate()
   },
@@ -164,6 +176,11 @@ export default {
     },
     convertDate(date) {
       return moment(date).format('YYYY-MM-DD')
+    },
+    formatNumber(number) {
+      const result = helpers.formatCost(number)
+      console.log(result.split('₫')[0])
+      return result.split('₫')[0]
     },
   },
 }
