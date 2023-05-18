@@ -11,6 +11,7 @@
       <p class="pdf-center">---------------------------------</p>
       <p>Thông tin đơn hàng</p>
       <p v-if="discount != null">Giảm giá: {{ discount }} %</p>
+      <i>{{ dataBill?.method != null ? 'Online' : 'Tại quán' }} </i>
       <table class="table-pdf">
         <tr>
           <th style="text-align: start">Tên Sản Phẩm</th>
@@ -23,7 +24,12 @@
           <td>{{ formatNumber(item.price) }}</td>
         </tr>
         <br />
-        <h1 id="total1">Total : {{ formatNumber(totalBill) }}</h1>
+        <h1 id="total1">
+          Tổng : <span> {{ formatNumber(totalBill) }}</span>
+          <span class="line gray" v-if="discount">
+            {{ subTotal && formatNumber(subTotal) }}</span
+          >
+        </h1>
       </table>
     </div>
     <div class="fix"></div>
@@ -33,7 +39,14 @@
 import helpers from '~/ultis/helper'
 export default {
   layout: 'none',
-  props: ['productOrder', 'totalBill', 'infoCustomer', 'discount'],
+  props: [
+    'productOrder',
+    'totalBill',
+    'infoCustomer',
+    'discount',
+    'subTotal',
+    'dataBill',
+  ],
   methods: {
     formatNumber(number) {
       return helpers.formatCost(number)

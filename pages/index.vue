@@ -6,6 +6,7 @@
       :totalBill="setTotal"
       :inforCustommer="inforCustommer"
       :discount="discount"
+      :subTotal="subTotal"
       v-if="isShowPdf"
       ref="childComponent"
     />
@@ -128,7 +129,6 @@ import constant from '~/ultis/constant'
 import helpers from '~/ultis/helper'
 export default {
   name: 'IndexPage',
-  middleware: 'check-auth',
   data() {
     return {
       isShow: false,

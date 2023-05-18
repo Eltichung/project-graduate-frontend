@@ -4,6 +4,7 @@
       :productOrder="productOrder.arr"
       :totalBill="productOrder.total"
       :infoCustomer="infoCustomer"
+      :dataBill="detailBill"
       v-if="isShowPdf"
       ref="childComponent"
     />
@@ -40,7 +41,7 @@
             <th></th>
             <th v-if="currentTab === 1">Handle</th>
           </tr>
-          <tr v-for="item in dataBill" :key="item.id">
+          <tr v-for="(item, index) in dataBill" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.total }}</td>
             <td>{{ convertDate(item.created_at) }}</td>
@@ -51,7 +52,7 @@
               <img
                 src="/img/checked1.png"
                 alt=""
-                @click="confirmBill(item.id)"
+                @click="confirmBill(item.id, index)"
               />
               <img src="/img/cancel.png" alt="" @click="cancelBill(item.id)" />
             </td>
@@ -72,6 +73,7 @@ import { mapActions } from 'vuex'
 import moment from 'moment'
 import constant from '~/ultis/constant'
 export default {
+  middleware: 'check-auth',
   data() {
     return {
       isShowPdf: false,
@@ -83,6 +85,7 @@ export default {
         arr: [],
         idBill: 0,
       },
+      detailBill: {},
       isActive: true,
       currentTab: 1,
       confirm: 0,
@@ -130,8 +133,9 @@ export default {
         this.infoCustomer = data.data.customer[0]
       })
     },
-    confirmBill(id) {
+    confirmBill(id, index) {
       this.getProduct(id)
+      this.detailBill = this.dataBill[index]
       this.isShowPdf = true
       const param = {
         id: id,

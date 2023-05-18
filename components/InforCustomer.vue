@@ -25,7 +25,11 @@
                   rules="required|phone"
                 >
                   <label for="">Phone</label>
-                  <input v-model="inforCustommer.phone" type="text" />
+                  <input
+                    v-model="inforCustommer.phone"
+                    type="text"
+                    maxlength="10"
+                  />
                   <p class="err">{{ errors[0] }}</p>
                 </ValidationProvider>
               </div>
@@ -83,6 +87,7 @@ export default {
         this.inforCustommer.name = ''
         this.inforCustommer.phone = ''
         this.inforCustommer.address = ''
+        this.$toast.success('Successful')
       })
     },
   },

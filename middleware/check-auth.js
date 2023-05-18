@@ -1,4 +1,4 @@
-export default function ({ app, $axios }) {
+export default function ({ app, $axios, redirect, route }) {
   const header = localStorage.getItem('token')
   if (header !== null) {
     app.store.commit('home/SET_ADMIN', 1)
@@ -7,7 +7,9 @@ export default function ({ app, $axios }) {
       config.headers.common['Authorization'] = `Bearer ${header}`
     })
   } else {
-    app.router.push('/')
     app.store.commit('home/SET_ADMIN', 0)
+    if (route.path !== '/') {
+      return redirect('/')
+    }
   }
 }
