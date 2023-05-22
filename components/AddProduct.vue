@@ -21,8 +21,8 @@
               <div class="form-group">
                 <label for="">Type</label>
                 <select id="select" v-model="selected">
-                  <option v-for="item in type" :key="item.id" :value="item.id">
-                    {{ item.name }}
+                  <option v-for="item in type" :key="item.id" :value="item.id" :selected="item.id=selected">
+                    {{ item.name }} 
                   </option>
                   >
                 </select>
@@ -99,6 +99,7 @@ export default {
   },
   created() {
     this.getDataType()
+    console.log(this.selected)
   },
   methods: {
     ...mapActions('home', ['getType', 'updateProduct', 'addProduct']),

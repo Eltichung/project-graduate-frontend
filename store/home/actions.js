@@ -24,7 +24,8 @@ export default {
         })
         .catch((error) => {
           reject(error)
-          helper.callApiErr()
+          console.log(error)
+          helper.callApiErr("You can't delete type because product exit belong it")
         })
     })
   },
@@ -119,7 +120,7 @@ export default {
         })
         .catch((error) => {
           reject(error)
-          helper.callApiErr()
+          helper.callApiErr(error.message)
         })
     })
   },

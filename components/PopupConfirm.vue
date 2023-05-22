@@ -1,8 +1,8 @@
 <template>
   <modal name="confirm" :adaptive="true">
-    <div class="modal popup">
+    <div class="modal popup modal-confirm">
       <h3>Are you sure?</h3>
-      <div class="btn between-xs">
+      <div class="btn between-xs confirm">
         <button @click="confirm">Yes</button>
         <button @click="cancel">No</button>
       </div>
@@ -11,10 +11,11 @@
 </template>
 <script>
 export default {
-  props: ['callBack'],
+  props: ['deleteItem'],
   methods: {
     confirm() {
-      this.callBack()
+      this.deleteItem()
+      this.$emit('loadData')
     },
     cancel() {
       this.$modal.hide('confirm')
@@ -22,7 +23,7 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .popup.modal {
   img {
     position: absolute;
@@ -30,6 +31,7 @@ export default {
     right: 10px;
     height: 90px;
     object-fit: contain;
+    padding-bottom: 50px;
   }
 
   h3 {
@@ -42,7 +44,7 @@ export default {
     text-align: center;
   }
 
-  .btn {
+  .btn.confirm {
     display: flex;
 
     button {
@@ -56,12 +58,11 @@ export default {
       font-style: normal;
       font-weight: 400;
       font-size: 20px;
-      line-height: 20px;
-      padding-bottom: 4px;
+      padding: 4px;
       border: none;
       cursor: pointer;
       transition: all 0.3s;
-      width: 170px;
+      width: 70px !important;
       border-radius: 30px;
     }
   }

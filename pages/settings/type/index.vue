@@ -22,13 +22,13 @@
             <button class="btn-update" @click="editProduct(item)">
               Update
             </button>
-            <button @click="deleteItem(item.id)">Delete</button>
+            <button @click="confirm(item.id)">Delete</button>
           </td>
         </tr>
       </table>
     </div>
     <AddType :productSelected="productSelected" @loadData="loadData" />
-    <PopupConfirm />
+    <PopupConfirm :deleteItem="deleteItem" @loadData="'loadData'"/>
   </div>
 </template>
 <script>
@@ -50,15 +50,21 @@ export default {
   methods: {
     ...mapActions('home', ['getType', 'deleteType']),
     confirm(id) {
+      this.$modal.show('confirm')
       this.idProductDelete = id
     },
     loadData() {
       this.$modal.hide('form-type')
       this.getType().then((data) => (this.type = data.data.data))
     },
-    deleteItem(id) {
-      this.deleteType(id).then((data) => {
+    deleteItem() {
+      this.deleteType(this.idProductDelete)
+      .then((data)=>{
+        this.$modal.hide('confirm')
         this.loadData()
+      })
+      .finally(()=>{
+        this.$modal.hide('confirm')
       })
     },
     editProduct(item) {

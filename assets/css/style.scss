@@ -323,7 +323,6 @@ button {
 
         &-total {
             position: absolute;
-            right: 25px;
             bottom: 50px;
             width: 400px;
 
@@ -416,7 +415,6 @@ button {
             tr {
                 display: flex;
                 gap: 50px;
-                justify-content: space-between;
                 align-items: center;
                 border-bottom: 1px solid $gray;
             }
@@ -801,4 +799,8 @@ button {
             margin: 0;
         }
     }
+}
+.modal-confirm
+{
+    padding-bottom: 50px;
 }

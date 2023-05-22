@@ -28,12 +28,13 @@
             <button class="btn-update" @click="editProduct(item)">
               Update
             </button>
-            <button @click="deleteItem(item.slug)">Delete</button>
+            <button @click="confirm(item.slug)">Delete</button>
           </td>
         </tr>
       </table>
     </div>
     <AddProduct :productSelected="productSelected" @loadData="loadData" />
+    <PopupConfirm :deleteItem="deleteItem" @loadData="loadData"/>
   </div>
 </template>
 <script>
@@ -43,6 +44,7 @@ export default {
   middleware: 'check-auth',
   data() {
     return {
+      slugProductDelete: null,
       productSelected: {},
       dataProduct: [],
     }
@@ -57,6 +59,10 @@ export default {
       this.getAllProduct().then((data) => (this.dataProduct = data.data.data))
       this.$modal.hide('form-product')
     },
+    confirm(slug) {
+      this.$modal.show('confirm')
+      this.slugProductDelete = slug
+    },
     showProduct(id) {
       this.$modal.show('detailOrder')
       this.getDetailBill(id).then((data) => {
@@ -65,9 +71,13 @@ export default {
         this.productOrder.idBill = data.data.id_bill
       })
     },
-    deleteItem(slug) {
-      this.deleteProduct(slug).then((data) => {
+    deleteItem() {
+      this.deleteProduct(this.slugProductDelete).then((data) => {
+        this.$modal.hide('confirm')
         this.loadData()
+      })
+      .finally(()=>{
+        this.$modal.hide('confirm')
       })
     },
     editProduct(item) {
