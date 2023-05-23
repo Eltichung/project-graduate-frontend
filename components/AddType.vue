@@ -6,7 +6,7 @@
         <div class="form">
           <h1>Product</h1>
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form action="" @submit.prevent="handleSubmit(submit)">
+            <form action="" @submit.prevent="handleSubmit(submit)" enctype="multipart/form-data">
               <div class="form-group">
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -70,7 +70,6 @@ export default {
       this.$modal.hide('form-type')
     },
     submit() {
-      console.log(this.productSelected.id)
       // eslint-disable-next-line vue/no-mutating-props
       const formData = new FormData()
       if (this.$refs.file.files[0] != null) {
@@ -78,6 +77,7 @@ export default {
       }
       formData.append('name', this.productSelected.name)
       if (this.productSelected.id !== undefined) {
+        formData.append('id', this.productSelected.id)
         this.updateType(formData, {
           headers: {
             'Content-Type': 'multipart/form-data',

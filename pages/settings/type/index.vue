@@ -98,4 +98,9 @@ td img {
   object-fit: cover;
   height: 50px;
 }
+td,th
+{
+  word-wrap: break-word;
+  width: 180px;
+}
 </style>

@@ -83,7 +83,6 @@ export default {
     editProduct(item) {
       this.$modal.show('form-product')
       this.productSelected = item
-      console.log(this.productSelected)
     },
   },
 }
@@ -101,6 +100,11 @@ td:last-child {
 }
 th:last-child {
   width: 300px;
+}
+td,th
+{
+  max-width: 150px;
+  word-wrap: break-word;
 }
 td img {
   width: 150px;

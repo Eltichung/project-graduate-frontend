@@ -6,7 +6,7 @@
         <div class="form">
           <h1>Product</h1>
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form action="" @submit.prevent="handleSubmit(submit)">
+            <form action="" @submit.prevent="handleSubmit(submit)" enctype="multipart/form-data">
               <div class="form-group">
                 <ValidationProvider
                   v-slot="{ errors }"
