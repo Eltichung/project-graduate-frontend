@@ -37,7 +37,7 @@
           :class="{ active_type: currentType == item.id }"
           @click="filterProduct(item.id)"
         >
-          <img src="/img/loupe.png" alt="" />
+          <img :src="item.imgUrl" alt="" />
           <p>{{ item.name }}</p>
         </div>
       </div>

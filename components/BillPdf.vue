@@ -70,6 +70,8 @@ export default {
 .pdf {
   color: #000 !important;
   background: #fff;
+  height: 100vh;
+  z-index: 99999999999999999999999999999;
 }
 .pdf .box-content {
   margin: 0 auto;

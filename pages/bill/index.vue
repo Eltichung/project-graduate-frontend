@@ -39,7 +39,7 @@
             <th>Total</th>
             <th>Date</th>
             <th></th>
-            <th v-if="currentTab === 1">Handle</th>
+            <th v-if="currentTab === 1"></th>
           </tr>
           <tr v-for="(item, index) in dataBill" :key="item.id">
             <td>{{ item.id }}</td>
