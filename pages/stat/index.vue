@@ -18,8 +18,13 @@
         <p>VND</p>
       </div>
       <div class="box-stat-item">
-        <p class="box-stat-item-title">Bill</p>
-        <h1>{{ dataStatToday.quantity_bill }}</h1>
+        <p class="box-stat-item-title">Bill-Online</p>
+        <h1>{{ dataStatToday.quantity_bill_online }}</h1>
+        <p>Bill</p>
+      </div>
+      <div class="box-stat-item">
+        <p class="box-stat-item-title">Bill-Offline</p>
+        <h1>{{ dataStatToday.quantity_bill_offline }}</h1>
         <p>Bill</p>
       </div>
       <!-- <div class="box-stat-item">
