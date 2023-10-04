@@ -1,20 +1,20 @@
 <template>
   <div class="wrapper bill">
     <div class="box-header">
-      <h1 class="title">Product</h1>
+      <h1 class="title">Sản Phẩm</h1>
     </div>
     <div class="box-content">
       <button class="btn-add" role="button" @click="editProduct({})">
-        Add
+        Thêm
       </button>
       <table>
         <tr>
           <th>Id</th>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Discount</th>
+          <th>Tên SP</th>
+          <th>Loại</th>
+          <th>Giá tiền</th>
+          <th>Ảnh</th>
+          <th>Giảm giá</th>
           <th></th>
         </tr>
         <tr v-for="item in dataProduct" :key="item.id">
@@ -26,9 +26,9 @@
           <td>{{ item.discount }}</td>
           <td class="btn-edit">
             <button class="btn-update" @click="editProduct(item)">
-              Update
+              Sửa
             </button>
-            <button @click="confirm(item.slug)">Delete</button>
+            <button @click="confirm(item.slug)">Xóa</button>
           </td>
         </tr>
       </table>

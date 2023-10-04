@@ -2,30 +2,30 @@
   <div class="wrapper stat">
     <div class="header box between-xs middle-xs">
       <div class="header-text">
-        <h1>Statistical</h1>
+        <h1>Thống kê</h1>
       </div>
     </div>
     <div class="box-stat">
       <!-- <div class="box-stat-item first"></div> -->
       <div class="box-stat-item">
-        <p class="box-stat-item-title">Yesterday</p>
+        <p class="box-stat-item-title">Hôm qua</p>
         <h1>{{ formatNumber(dataStatToday.total_yesterday) }}</h1>
         <p>VND</p>
       </div>
       <div class="box-stat-item">
-        <p class="box-stat-item-title">Now</p>
+        <p class="box-stat-item-title">Hôm nay</p>
         <h1>{{ formatNumber(dataStatToday.total_now) }}</h1>
         <p>VND</p>
       </div>
       <div class="box-stat-item">
-        <p class="box-stat-item-title">Bill-Online</p>
+        <p class="box-stat-item-title">Đơn hàng online</p>
         <h1>{{ dataStatToday.quantity_bill_online }}</h1>
-        <p>Bill</p>
+        <p>Đơn hàng</p>
       </div>
       <div class="box-stat-item">
-        <p class="box-stat-item-title">Bill-Offline</p>
+        <p class="box-stat-item-title">Đơn hàng tại quán</p>
         <h1>{{ dataStatToday.quantity_bill_offline }}</h1>
-        <p>Bill</p>
+        <p>Đơn hàng</p>
       </div>
       <!-- <div class="box-stat-item">
         <h1>{{ dataStatToday.total_now }}</h1>
@@ -34,15 +34,15 @@
     </div>
     <div class="box-main">
       <div class="box-hot">
-        <h1>Top product</h1>
+        <h1>Top Sản phẩm</h1>
         <div class="total">
           <div class="total-item">
             <h3>{{ dataStatToday.quantity_product }}</h3>
-            <p>Sold</p>
+            <p>Đã bán</p>
           </div>
           <div class="total-item">
             <h3>{{ dateNow }}</h3>
-            <p>Date</p>
+            <p>Thời gian</p>
           </div>
         </div>
         <div class="list-product">
@@ -54,7 +54,7 @@
             <img :src="`/img/checked${index + 1}.png`" alt="" />
             <div class="list-product-item-text">
               <p>{{ item.name }}</p>
-              <p>Sold: {{ item.total }}</p>
+              <p>Đã bán: {{ item.total }}</p>
             </div>
           </div>
         </div>

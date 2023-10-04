@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import moment from 'moment'
 export default {
-  callApiSusscess(message = 'success') {
+  callApiSusscess(message = 'Thành công') {
     Vue.$toast.success(message)
   },
-  callApiErr(message = 'error') {
+  callApiErr(message = 'Thất bại') {
     Vue.$toast.error(message)
   },
   formatCost(cost) {

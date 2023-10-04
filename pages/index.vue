@@ -13,7 +13,7 @@
     <div class="wrapper" v-else>
       <div class="header box between-xs middle-xs">
         <div class="header-text">
-          <h1>Eltic Restaurant</h1>
+          <h1>Eltic Coffee</h1>
           <p>au 12th 2020</p>
         </div>
         <div class="header-search">

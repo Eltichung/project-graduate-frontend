@@ -13,7 +13,7 @@
                   name="input"
                   rules="required"
                 >
-                  <label for="">Name</label>
+                  <label for="">Loại SP</label>
                   <input v-model="productSelected.name" type="text" />
                   <p class="err">{{ errors[0] }}</p>
                 </ValidationProvider>
@@ -25,7 +25,7 @@
                   v-if="preview !== undefined"
                 />
                 <div class="input-file">
-                  <label>Image</label>
+                  <label>Ảnh</label>
                   <input
                     id="my-file"
                     ref="file"
@@ -37,8 +37,8 @@
                 </div>
               </div>
               <div class="btn">
-                <button id="btn-close" @click="close">Close</button>
-                <button id="btn-submit" @click="handleSubmit()">Submit</button>
+                <button id="btn-close" @click="close">Đóng</button>
+                <button id="btn-submit" @click="handleSubmit()">Đồng Ý</button>
               </div>
             </form>
           </ValidationObserver>

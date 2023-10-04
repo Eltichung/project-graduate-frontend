@@ -15,29 +15,29 @@
           :class="{ active: currentTab === 1 }"
           @click="loadData(1)"
         >
-          Waiting
+          Đang chờ
         </h1>
         <h1
           class="title"
           :class="{ active: currentTab === 2 }"
           @click="loadData(2)"
         >
-          Successful
+          Thành công
         </h1>
         <h1
           class="title"
           :class="{ active: currentTab === 3 }"
           @click="loadData(3)"
         >
-          Cancel
+          Hủy
         </h1>
       </div>
       <div class="box-content">
         <table>
           <tr>
             <th>Id</th>
-            <th>Total</th>
-            <th>Date</th>
+            <th>Tổng tiền</th>
+            <th>Thời gian</th>
             <th></th>
             <th v-if="currentTab === 1"></th>
           </tr>

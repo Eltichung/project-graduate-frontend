@@ -4,7 +4,7 @@
     <div class="modal">
       <div class="box-content modal">
         <div class="form">
-          <h1>Product</h1>
+          <h1>Sản Phẩm</h1>
           <ValidationObserver v-slot="{ handleSubmit }">
             <form action="" @submit.prevent="handleSubmit(submit)">
               <div class="form-group">
@@ -13,7 +13,7 @@
                   name="Name"
                   rules="required|max:128"
                 >
-                  <label for="">Name</label>
+                  <label for="">Tên SP</label>
                   <input v-model="inforCustommer.name" type="text" />
                   <p class="err">{{ errors[0] }}</p>
                 </ValidationProvider>
@@ -24,7 +24,7 @@
                   name="Phone"
                   rules="required|phone"
                 >
-                  <label for="">Phone</label>
+                  <label for="">Số điện thoại</label>
                   <input
                     v-model="inforCustommer.phone"
                     type="text"
@@ -39,14 +39,14 @@
                   name="Address"
                   rules="required|max:128"
                 >
-                  <label for="">Address</label>
+                  <label for="">Địa chỉ</label>
                   <input v-model="inforCustommer.address" type="text" />
                   <p class="err">{{ errors[0] }}</p>
                 </ValidationProvider>
               </div>
               <div class="btn">
-                <button id="btn-close" @click="close">Close</button>
-                <button id="btn-submit">Submit</button>
+                <button id="btn-close" @click="close">Đóng</button>
+                <button id="btn-submit">Đồng Ý</button>
               </div>
             </form>
           </ValidationObserver>

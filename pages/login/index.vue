@@ -12,7 +12,7 @@
 
     <div class="login">
       <div class="container">
-        <h1>Login to access to<br />your account</h1>
+        <h1>Đăng nhập<br />tài khoản Admin</h1>
 
         <div class="login-form">
           <ValidationObserver v-slot="{ handleSubmit }">
@@ -43,14 +43,14 @@
               </ValidationProvider>
               <div class="remember-form">
                 <input type="checkbox" />
-                <span>Remember me</span>
+                <span>Nhớ tài khoản</span>
               </div>
               <div class="forget-pass">
-                <a href="#">Forgot Password ?</a>
+                <a href="#">Quên mật khẩu ?</a>
               </div>
             </form>
           </ValidationObserver>
-          <button type="submit" @click="handleSubmit()">LOG-IN</button>
+          <button type="submit" @click="handleSubmit()">Đăng nhập</button>
         </div>
       </div>
     </div>

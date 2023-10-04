@@ -11,7 +11,7 @@
             <div class="nav-menu-img">
               <img src="/img/home.png" alt="" />
             </div>
-            <p>Home</p>
+            <p>Trang chủ</p>
           </nuxt-link>
         </li>
         <li v-if="!!isAdmin" class="center-xs" @click="handler">
@@ -19,7 +19,7 @@
             <div class="nav-menu-img">
               <img src="/img/bill.png" alt="" />
             </div>
-            <p>Bill</p>
+            <p>Đơn Hàng</p>
             <p id="noti"></p>
           </nuxt-link>
         </li>
@@ -28,7 +28,7 @@
             <div class="nav-menu-img">
               <img src="/img/stat.png" alt="" />
             </div>
-            <p>Statistical</p>
+            <p>Thống kê</p>
           </nuxt-link>
         </li>
         <li v-if="!!isAdmin" class="center-xs">
@@ -36,7 +36,7 @@
             <div class="nav-menu-img">
               <img src="/img/product.png" alt="" />
             </div>
-            <p>Product</p>
+            <p>Sản Phẩm</p>
           </nuxt-link>
         </li>
         <li v-if="!!isAdmin" class="center-xs">
@@ -44,7 +44,7 @@
             <div class="nav-menu-img">
               <img src="/img/type.png" alt="" />
             </div>
-            <p>Type</p>
+            <p>Loại SP</p>
           </nuxt-link>
         </li>
         <li v-if="!isAdmin" class="center-xs">
@@ -60,7 +60,7 @@
             <div class="nav-menu-img" @click="logout">
               <img src="/img/user.png" alt="" />
             </div>
-            <p>Customer</p>
+            <p>Khách hàng</p>
           </nuxt-link>
         </li>
       </ul>
@@ -69,15 +69,14 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import Pusher from 'pusher-js'
+// eslint-disable-next-line no-unused-vars
+import helpers from '~/ultis/helper'
 // import constant from '~/ultis/constant'
 export default {
-  watch: {
-    count(newValue) {
-      this.SET_COUNT_BILL(newValue)
-    },
-  },
+  middleware: 'check-auth',
   data() {
     return {
       isShow: false,
@@ -85,7 +84,12 @@ export default {
       isMenu: true,
     }
   },
-  middleware: 'check-auth',
+  watch: {
+    count(newValue) {
+      this.SET_COUNT_BILL(newValue)
+    },
+  },
+  // eslint-disable-next-line vue/order-in-components
   computed: {
     ...mapState('home', ['isAdmin', 'billOnline']),
   },
@@ -100,11 +104,12 @@ export default {
     handler() {
       const tagP = document.querySelector('#noti')
       if (tagP !== null) {
-        console.log('a')
+
         tagP.style.display = 'none'
       }
     },
   },
+  // eslint-disable-next-line vue/order-in-components
   mounted() {
     const checkAdmin = this.isAdmin
     const tagP = document.querySelector('#noti')
@@ -125,6 +130,8 @@ export default {
       const bill = document.querySelector('#noti')
       bill.textContent = 'New'
       bill.style.display = 'block'
+      // eslint-disable-next-line no-undef
+      Vue.$toast.success("New bill")
     })
   },
 }

@@ -13,13 +13,13 @@
                   name="input"
                   rules="required"
                 >
-                  <label for="">Name</label>
+                  <label for="">Tên SP</label>
                   <input v-model="productSelected.name" type="text" />
                   <p class="err">{{ errors[0] }}</p>
                 </ValidationProvider>
               </div>
               <div class="form-group">
-                <label for="">Type</label>
+                <label for="">Loại SP</label>
                 <select id="select" v-model="selected">
                   <option v-for="item in type" :key="item.id" :value="item.id" :selected="item.id=selected">
                     {{ item.name }} 
@@ -56,7 +56,7 @@
                   v-if="preview !== undefined"
                 />
                 <div class="input-file">
-                  <label>Image</label>
+                  <label>Ảnh</label>
                   <input
                     id="my-file"
                     ref="file"
@@ -68,8 +68,8 @@
                 </div>
               </div>
               <div class="btn">
-                <button id="btn-close" @click="close">Close</button>
-                <button id="btn-submit">Submit</button>
+                <button id="btn-close" @click="close">Đóng</button>
+                <button id="btn-submit">Đồng Ý</button>
               </div>
             </form>
           </ValidationObserver>

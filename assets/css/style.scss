@@ -425,7 +425,8 @@ button {
                 min-width: 150px;
                 text-align: center;
                 font-size: 150%;
-
+                flex-wrap: wrap;
+                gap: 20px;
                 button {
                     padding: 8px 30px;
                     display: flex;

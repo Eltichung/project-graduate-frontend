@@ -1,17 +1,17 @@
 <template>
   <div class="wrapper bill">
     <div class="box-header">
-      <h1 class="title">Type</h1>
+      <h1 class="title">Loại SP</h1>
     </div>
     <div class="box-content">
       <button class="btn-add" role="button" @click="editProduct({})">
-        Add
+        Thêm
       </button>
       <table>
         <tr>
           <th>Id</th>
-          <th>Name</th>
-          <th>Image</th>
+          <th>Tên</th>
+          <th>Ảnh</th>
           <th></th>
         </tr>
         <tr v-for="item in type" :key="item.id">
@@ -20,9 +20,9 @@
           <td><img :src="item.imgUrl" alt="" /></td>
           <td class="btn-edit">
             <button class="btn-update" @click="editProduct(item)">
-              Update
+              Sửa
             </button>
-            <button @click="confirm(item.id)">Delete</button>
+            <button @click="confirm(item.id)">Xóa</button>
           </td>
         </tr>
       </table>

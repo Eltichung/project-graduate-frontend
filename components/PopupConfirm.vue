@@ -3,8 +3,8 @@
     <div class="modal popup modal-confirm">
       <h3>Are you sure?</h3>
       <div class="btn between-xs confirm">
-        <button @click="confirm">Yes</button>
-        <button @click="cancel">No</button>
+        <button @click="confirm">Đồng ý</button>
+        <button @click="cancel">Đóng</button>
       </div>
     </div>
   </modal>

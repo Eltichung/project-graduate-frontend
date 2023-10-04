@@ -3,15 +3,15 @@
     <div class="modal">
       <div class="box-content modal">
         <table>
-          <h1>Bill:{{ productOrder.idBill }}</h1>
-          <h3 class="gray">Name: {{ infoCustomer.name }}</h3>
-          <h3 class="gray">Phone: {{ infoCustomer.phone }}</h3>
-          <h3 class="gray">Address: {{ infoCustomer.address }}</h3>
-          <h3 class="gray">Time: {{ formatDate(infoCustomer.created_at) }}</h3>
+          <h1>Hóa Đơn:{{ productOrder.idBill }}</h1>
+          <h3 class="gray">Tên KH: {{ infoCustomer.name }}</h3>
+          <h3 class="gray">SDT: {{ infoCustomer.phone }}</h3>
+          <h3 class="gray">Địa chỉ: {{ infoCustomer.address }}</h3>
+          <h3 class="gray">Thời gian: {{ formatDate(infoCustomer.created_at) }}</h3>
           <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th>Tên SP</th>
+            <th>Số Lượng</th>
+            <th>Giá Tiền</th>
           </tr>
           <tr v-for="item in productOrder.arr" :key="item.id">
             <td>{{ item.name }}</td>
@@ -22,7 +22,7 @@
         </table>
       </div>
       <div class="btn between-xs">
-        <button @click="close" id="btn-close">Close</button>
+        <button @click="close" id="btn-close">Đóng</button>
       </div>
     </div>
   </modal>
